@@ -17,7 +17,7 @@ import { profile } from "../data/profile";
           <a 
             href={link.href} 
             data-email={link.isEmail ? "true" : undefined}
-            class={link.isEmail ? "email-link" : ""}
+            class={`${link.isEmail ? "email-link" : ""} ${link.label === "CV" ? "cv-link" : ""}`}
           >
             {link.label}
           </a>
@@ -26,6 +26,12 @@ import { profile } from "../data/profile";
     </ul>
   </div>
 </section>
+
+<style>
+  .cv-link {
+    display: none !important;
+  }
+</style>
 
 <script>
   // Simple email obfuscation to prevent bot scraping
