@@ -24,7 +24,7 @@ const hrefFor = (resource: Resource) =>
     <div class="release-total">
       <span class="hf-mark">Hugging Face</span>
       <strong>{format(releaseStats.downloads)}</strong>
-      <span>total downloads</span>
+      <span>downloads / month</span>
     </div>
 
     <div class="release-groups">
@@ -35,7 +35,7 @@ const hrefFor = (resource: Resource) =>
               <p class="release-kind">{group.kind}</p>
               <h3>{group.title}</h3>
             </div>
-            <span>{format(group.downloads)} downloads</span>
+            <span>{format(group.downloads)} downloads/mo</span>
           </div>
 
           <p>{group.description}</p>
