@@ -42,7 +42,13 @@ const { id, title, entries } = Astro.props;
               {entry.venue}{entry.citations && entry.citations >= 1 ? ` · ${entry.citations} citations` : ""}
             </p>
           )}
-          {entry.abstract && <p class="abstract">{entry.abstract}</p>}
+          {entry.abstract && (
+            <div class="abstract-wrapper">
+              <p class="abstract">{entry.abstract}</p>
+              <button class="abstract-toggle" aria-expanded="false">Read more</button>
+            </div>
+          )}
+
           {entry.description && <p>{entry.description}</p>}
 
           {entry.links && (
@@ -55,3 +61,66 @@ const { id, title, entries } = Astro.props;
     ))}
   </div>
 </section>
+
+<script>
+  function setupAbstractToggles() {
+    const wrappers = document.querySelectorAll('.abstract-wrapper');
+    
+    wrappers.forEach(wrapper => {
+      const abstract = wrapper.querySelector('.abstract');
+      const toggle = wrapper.querySelector('.abstract-toggle');
+      
+      if (!abstract || !toggle) return;
+
+      // Only show toggle if text is long enough to be truncated
+      // We check if scrollHeight > clientHeight (approximate check for truncation)
+      // Since it's CSS clamped, we can check if the line count is likely exceeded
+      
+      toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+        abstract.classList.toggle('is-expanded');
+        toggle.textContent = isExpanded ? 'Read more' : 'Show less';
+      });
+    });
+  }
+
+  // Run on initial load
+  setupAbstractToggles();
+  // Run on view transitions if enabled
+  document.addEventListener('astro:after-swap', setupAbstractToggles);
+</script>
+
+<style>
+  .abstract-wrapper {
+    margin-bottom: 7px;
+  }
+  .abstract {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+    transition: all 0.2s ease;
+  }
+  .abstract.is-expanded {
+    display: block;
+    -webkit-line-clamp: initial;
+  }
+  .abstract-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .abstract-toggle:hover {
+    text-decoration: underline;
+  }
+</style>
