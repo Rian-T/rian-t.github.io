@@ -7,8 +7,7 @@ export const releaseGroups = [
     title: "Biomedical encoders",
     kind: "models",
     downloads: 10225,
-    description:
-      "Core biomedical encoders and NER release. Base models stay visible; large variants are folded below.",
+    description: "French biomedical encoder models",
     primary: [
       { id: "almanach/camembert-bio-base", downloads: 9564, tag: "French biomedical encoder" },
       { id: "almanach/ModernCamemBERT-bio-base", downloads: 134, tag: "French CLM-detour encoder" },
@@ -25,8 +24,7 @@ export const releaseGroups = [
     title: "CamemBERT 2.0 / ModernCamemBERT",
     kind: "model collection",
     downloads: 12881,
-    description:
-      "Updated French encoders from the CamemBERT 2.0 / ModernCamemBERT line.",
+    description: "French encoder models",
     collection: { label: "collection", href: "https://huggingface.co/collections/almanach/moderncamembert-67f7e6d85ede5f7cfc1ce012" },
     primary: [
       { id: "almanach/camembertav2-base", downloads: 7912, tag: "DeBERTaV3 encoder" },
@@ -53,8 +51,7 @@ export const releaseGroups = [
     title: "Gaperon",
     kind: "model collection",
     downloads: 571,
-    description:
-      "French-English generative model suite. Main base models and quality classifier are visible; SFT variants are folded below.",
+    description: "French-English generative model suite.",
     collection: { label: "collection", href: "https://huggingface.co/collections/almanach/gaperon-67ffbd9a32f94f9fa49e18fd" },
     primary: [
       { id: "almanach/Gaperon-1125-8B", downloads: 306, tag: "main 8B model" },
