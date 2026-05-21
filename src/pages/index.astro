@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import ProfileIntro from "../components/ProfileIntro.astro";
+import ReleaseGroups from "../components/ReleaseGroups.astro";
+import SectionList from "../components/SectionList.astro";
+import { articles } from "../data/articles";
+import { blogPosts } from "../data/blog";
+---
+
+<BaseLayout title="Rian Touchent">
+  <main class="shell">
+    <Header />
+    <ProfileIntro />
+
+    <div class="content-stack">
+      <SectionList id="articles" title="Articles" entries={articles} />
+      <ReleaseGroups />
+      <SectionList id="blog" title="Blog posts" entries={blogPosts} />
+    </div>
+  </main>
+</BaseLayout>

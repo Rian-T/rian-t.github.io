@@ -1,0 +1,81 @@
+---
+import { releaseGroups, releaseStats } from "../data/releases";
+
+type Resource = {
+  id: string;
+  type?: string;
+  downloads: number;
+  tag: string;
+};
+
+const format = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const hrefFor = (resource: Resource) =>
+  resource.type === "dataset"
+    ? `https://huggingface.co/datasets/${resource.id}`
+    : `https://huggingface.co/${resource.id}`;
+---
+
+<section class="section releases-section" id="releases">
+  <div class="section-label">
+    <h2>Releases</h2>
+  </div>
+
+  <div class="release-panel">
+    <div class="release-total">
+      <span class="hf-mark">Hugging Face</span>
+      <strong>{format(releaseStats.downloads)}</strong>
+      <span>total downloads</span>
+    </div>
+
+    <div class="release-groups">
+      {releaseGroups.map((group) => (
+        <article class="release-group">
+          <div class="release-head">
+            <div>
+              <p class="release-kind">{group.kind}</p>
+              <h3>{group.title}</h3>
+            </div>
+            <span>{format(group.downloads)} downloads</span>
+          </div>
+
+          <p>{group.description}</p>
+
+          {group.collection && (
+            <p class="collection-link"><a href={group.collection.href}>{group.collection.label}</a></p>
+          )}
+
+          <ul class="resource-list">
+            {group.primary.map((resource) => (
+              <li>
+                <a href={hrefFor(resource)}>
+                  <span class="hf-dot">HF</span>
+                  <span>{resource.id.replace("almanach/", "")}</span>
+                </a>
+                <em>{resource.tag}</em>
+                <strong>{resource.downloads > 0 ? format(resource.downloads) : ""}</strong>
+              </li>
+            ))}
+          </ul>
+
+          {group.variants && group.variants.length > 0 && (
+            <details class="variants">
+              <summary>{group.variantsLabel} ({group.variants.length})</summary>
+              <ul class="resource-list compact">
+                {group.variants.map((resource) => (
+                  <li>
+                    <a href={hrefFor(resource)}>
+                      <span class="hf-dot">HF</span>
+                      <span>{resource.id.replace("almanach/", "")}</span>
+                    </a>
+                    <em>{resource.tag}</em>
+                    <strong>{resource.downloads > 0 ? format(resource.downloads) : ""}</strong>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

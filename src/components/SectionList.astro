@@ -1,0 +1,57 @@
+---
+interface LinkItem {
+  label: string;
+  href: string;
+}
+
+interface Entry {
+  year: string;
+  title: string;
+  description?: string;
+  abstract?: string;
+  venue?: string;
+  citations?: number;
+  tags?: string[];
+  links?: LinkItem[];
+}
+
+interface Props {
+  id: string;
+  title: string;
+  entries: Entry[];
+}
+
+const { id, title, entries } = Astro.props;
+---
+
+<section class="section" id={id}>
+  <div class="section-label">
+    <h2>{title}</h2>
+  </div>
+
+  <div class="entries">
+    {entries.length === 0 && <div class="empty" aria-label={`${title}: 0 entries`}></div>}
+
+    {entries.map((entry) => (
+      <article class="entry">
+        <time>{entry.year}</time>
+        <div class="entry-main">
+          <h3>{entry.title}</h3>
+          {entry.venue && (
+            <p class="venue">
+              {entry.venue}{entry.citations && entry.citations >= 1 ? ` · ${entry.citations} citations` : ""}
+            </p>
+          )}
+          {entry.abstract && <p class="abstract">{entry.abstract}</p>}
+          {entry.description && <p>{entry.description}</p>}
+
+          {entry.links && (
+            <ul class="entry-links" aria-label={`${entry.title} links`}>
+              {entry.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+            </ul>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+import { profile } from "../data/profile";
+---
+
+<section class="intro">
+  <div class="portrait-frame">
+    <img src="/assets/avatar.jpeg" alt={profile.name} />
+  </div>
+
+  <div class="intro-copy">
+    <h1>{profile.name}</h1>
+    <p class="intro-meta">{profile.role} · {profile.affiliation}</p>
+    <p class="bio">{profile.bio}</p>
+    <ul class="link-row" aria-label="Profile links">
+      {profile.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+    </ul>
+  </div>
+</section>
