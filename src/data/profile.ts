@@ -6,7 +6,7 @@ export const profile = {
     "Working on information extraction for clinical reports using LLMs. Previously intern at Inria Sophia-Antipolis - Team STARS.",
   links: [
     { label: "GitHub", href: "https://github.com/Rian-T" },
-    { label: "Email", href: "mailto:{firstname}.{lastname}@inria.fr" },
-    { label: "CV", href: "#" },
+    { label: "Email", href: "#", isEmail: true },
+    { label: "CV", href: "/resume.pdf" },
   ],
 };

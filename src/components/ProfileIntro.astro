@@ -12,7 +12,39 @@ import { profile } from "../data/profile";
     <p class="intro-meta">{profile.role} · {profile.affiliation}</p>
     <p class="bio">{profile.bio}</p>
     <ul class="link-row" aria-label="Profile links">
-      {profile.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      {profile.links.map((link) => (
+        <li>
+          <a 
+            href={link.href} 
+            data-email={link.isEmail ? "true" : undefined}
+            class={link.isEmail ? "email-link" : ""}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 </section>
+
+<script>
+  // Simple email obfuscation to prevent bot scraping
+  function setupEmail() {
+    const emailLinks = document.querySelectorAll('.email-link');
+    const u = "rian.touchent";
+    const d = "inria.fr";
+    
+    emailLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        (link as HTMLAnchorElement).href = `mailto:${u}@${d}`;
+      });
+      // Also set it on hover for better UX
+      link.addEventListener('mouseenter', () => {
+        (link as HTMLAnchorElement).href = `mailto:${u}@${d}`;
+      });
+    });
+  }
+
+  setupEmail();
+  document.addEventListener('astro:after-swap', setupEmail);
+</script>
