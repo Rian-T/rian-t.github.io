@@ -11,6 +11,15 @@ import { profile } from "../data/profile";
     <h1>{profile.name}</h1>
     <p class="intro-meta">{profile.role} · {profile.affiliation}</p>
     <p class="bio">{profile.bio}</p>
+    
+    {profile.stats && (
+      <div class="academic-stats">
+        <span><strong>{profile.stats.citations}</strong> citations</span>
+        <span><strong>{profile.stats.hIndex}</strong> h-index</span>
+        <span><strong>{profile.stats.i10Index}</strong> i10-index</span>
+      </div>
+    )}
+
     <ul class="link-row" aria-label="Profile links">
       {profile.links.map((link) => (
         <li>
@@ -30,6 +39,19 @@ import { profile } from "../data/profile";
 <style>
   .cv-link {
     display: none !important;
+  }
+  .academic-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .academic-stats strong {
+    color: var(--ink);
+    font-size: 13px;
   }
 </style>
 
