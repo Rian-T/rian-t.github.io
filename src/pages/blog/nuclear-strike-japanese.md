@@ -37,7 +37,7 @@ The Japanese effect is consistent across the entire Claude family. In balanced a
 
 Gemini Pro 3.1 confirms the effect in a second model family. It launches 53% in English dominant and 13% in Japanese (p=0.002). Unlike Claude, its effect is specific to Japanese: French and Portuguese stay at 100%.
 
-Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large 3, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four are ceiling models where language has nothing to modulate. Gemini Flash 3 is the exception. It hesitates in English at 79% in dominant yet shows no Japanese inhibition, despite sharing a provider with Gemini Pro 3.1. Baseline restraint seems necessary but not sufficient.
+Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four are ceiling models where language has nothing to modulate. Gemini Flash 3 is the exception. It hesitates in English at 79% in dominant yet shows no Japanese inhibition, despite sharing a provider with Gemini Pro 3.1. Baseline restraint seems necessary but not sufficient.
 
 ## Reasoning language is what matters
 
