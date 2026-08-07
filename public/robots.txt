@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rian-t.github.io/sitemap-index.xml

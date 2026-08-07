@@ -11,6 +11,7 @@ interface Props {
 const { title, bodyClass, description, ogImage } = Astro.props;
 const site = "https://rian-t.github.io";
 const ogImageUrl = ogImage ? site + ogImage : undefined;
+const canonical = site + Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -24,6 +25,8 @@ const ogImageUrl = ogImage ? site + ogImage : undefined;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
     {description && <meta name="description" content={description} />}

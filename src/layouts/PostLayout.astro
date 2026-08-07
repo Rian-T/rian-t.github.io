@@ -22,6 +22,14 @@ const displayDate = new Date(frontmatter.date)
   description={frontmatter.description}
   ogImage={isRadar ? "/media/strike_poster.jpg" : undefined}
 >
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.date,
+    author: { "@type": "Person", name: "Rian Touchent", url: "https://rian-t.github.io" },
+  })} />
   <main class="shell">
     <header class="top">
       <nav aria-label="Primary">

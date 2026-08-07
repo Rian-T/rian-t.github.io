@@ -19,6 +19,18 @@ const posts = Object.values(modules)
 ---
 
 <BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly in medicine.">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Rian Touchent",
+    jobTitle: "PhD student in AI / NLP",
+    affiliation: { "@type": "Organization", name: "Inria Paris - Team ALMAnaCH" },
+    url: "https://rian-t.github.io",
+    sameAs: [
+      "https://github.com/Rian-T",
+      "https://huggingface.co/rntc",
+    ],
+  })} />
   <main class="shell shell-narrow">
     <Header />
     <ProfileIntro />
