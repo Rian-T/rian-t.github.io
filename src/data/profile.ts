@@ -3,7 +3,7 @@ export const profile = {
   role: "PhD student in AI / NLP",
   affiliation: "Inria Paris - Team ALMAnaCH",
   bio:
-    "Working on information extraction for clinical reports using LLMs. Previously intern at Inria Sophia-Antipolis - Team STARS.",
+    "Working on information extraction for clinical reports using LLMs. I have recently started working on evaluating LLMs in high-stakes domains, mainly clinical text and strategic simulation. Previously intern at Inria Sophia-Antipolis - Team STARS.",
   stats: {
     citations: 78,
     hIndex: 5,

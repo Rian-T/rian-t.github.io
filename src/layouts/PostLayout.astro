@@ -1,0 +1,131 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={`${frontmatter.title} — Rian Touchent`}>
+  <main class="shell">
+    <header class="top">
+      <nav aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+    </header>
+
+    <article class="post">
+      <p class="post-date">{frontmatter.date}</p>
+      <h1>{frontmatter.title}</h1>
+      <slot />
+    </article>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  .post {
+    max-width: 680px;
+    padding: 12px 0 40px;
+  }
+  .post-date {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .post h1 {
+    margin-bottom: 24px;
+  }
+  .post h2 {
+    margin: 34px 0 10px;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 750;
+    line-height: 1.2;
+  }
+  .post p {
+    margin: 0 0 16px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .post blockquote {
+    margin: 0 0 16px;
+    padding-left: 16px;
+    border-left: 2px solid var(--line-dark);
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .post a {
+    color: var(--accent);
+  }
+  .post table {
+    width: 100%;
+    margin: 0 0 20px;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+  .post th,
+  .post td {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+  }
+  .post th:first-child,
+  .post td:first-child {
+    text-align: left;
+  }
+  .post thead th {
+    border-bottom: 1px solid var(--line-dark);
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .post .chart {
+    margin: 0 0 22px;
+    padding: 16px 0 4px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .post .chart-row {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+  .post .chart-row span {
+    color: var(--muted);
+  }
+  .post .bar {
+    height: 14px;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 10px;
+    line-height: 14px;
+    text-align: right;
+    padding-right: 4px;
+    min-width: 22px;
+  }
+  .post .bar.ja {
+    background: var(--accent-2);
+  }
+  .post .chart-caption {
+    margin: 10px 0 4px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+</style>

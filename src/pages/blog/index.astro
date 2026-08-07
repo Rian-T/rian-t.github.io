@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const modules = import.meta.glob("./*.md", { eager: true });
+const posts = Object.values(modules)
+  .map((mod: any) => ({
+    url: mod.url as string,
+    ...mod.frontmatter,
+  }))
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
+---
+
+<BaseLayout title="Blog — Rian Touchent">
+  <main class="shell">
+    <header class="top">
+      <nav aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+      </nav>
+    </header>
+
+    <section class="section" id="blog">
+      <div class="section-label">
+        <h2>Blog</h2>
+      </div>
+
+      <div class="entries">
+        {posts.map((post) => (
+          <article class="entry">
+            <time>{post.date}</time>
+            <div class="entry-main">
+              <h3><a href={post.url}>{post.title}</a></h3>
+              {post.description && <p>{post.description}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

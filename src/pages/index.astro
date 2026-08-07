@@ -6,6 +6,16 @@ import ReleaseGroups from "../components/ReleaseGroups.astro";
 import SectionList from "../components/SectionList.astro";
 import { articles } from "../data/articles";
 import { blogPosts } from "../data/blog";
+
+const modules = import.meta.glob("./blog/*.md", { eager: true });
+const posts = Object.values(modules)
+  .map((mod: any) => ({
+    year: mod.frontmatter.date,
+    title: mod.frontmatter.title,
+    description: mod.frontmatter.description,
+    links: [{ label: "Read", href: mod.url }],
+  }))
+  .sort((a, b) => (a.year < b.year ? 1 : -1));
 ---
 
 <BaseLayout title="Rian Touchent">
@@ -16,7 +26,8 @@ import { blogPosts } from "../data/blog";
     <div class="content-stack">
       <SectionList id="articles" title="Articles" entries={articles} />
       <ReleaseGroups />
-      <SectionList id="blog" title="Blog posts" entries={blogPosts} />
+      <SectionList id="blog" title="Blog" entries={posts} />
+      <SectionList id="projects" title="Past projects" entries={blogPosts} />
     </div>
   </main>
 </BaseLayout>
