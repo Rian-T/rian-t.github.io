@@ -31,34 +31,33 @@ const isRadar = frontmatter.theme === "radar";
       <h1>{frontmatter.title}</h1>
 
       {isRadar && (
-        <div class="radar-band" aria-hidden="true">
-          <svg viewBox="0 0 680 150" preserveAspectRatio="xMidYMid meet">
+        <div class="strike-band" id="strike" aria-hidden="true">
+          <svg viewBox="40 24 560 224" preserveAspectRatio="xMidYMid meet">
             <defs>
-              <linearGradient id="sweepFade" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="var(--accent-2)" stop-opacity="0.28"></stop>
-                <stop offset="100%" stop-color="var(--accent-2)" stop-opacity="0"></stop>
-              </linearGradient>
+              <filter id="strikeGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="1.6" result="b"></feGaussianBlur>
+                <feMerge>
+                  <feMergeNode in="b"></feMergeNode>
+                  <feMergeNode in="SourceGraphic"></feMergeNode>
+                </feMerge>
+              </filter>
             </defs>
-            <g class="rb-rules">
-              <line x1="0" y1="75" x2="248" y2="75"></line>
-              <line x1="432" y1="75" x2="680" y2="75"></line>
-              <line x1="0" y1="33" x2="200" y2="33"></line>
-              <line x1="480" y1="117" x2="680" y2="117"></line>
-            </g>
-            <g transform="translate(340 75)">
-              <g class="rb-rings">
-                <circle r="66"></circle>
-                <circle r="44"></circle>
-                <circle r="22"></circle>
-                <line x1="-66" y1="0" x2="66" y2="0"></line>
-                <line x1="0" y1="-66" x2="0" y2="66"></line>
+            <g filter="url(#strikeGlow)">
+              <polyline class="sb-land" points="64,126 96,100 130,88 170,84 204,96 228,120 236,154 224,180 202,198 170,212 132,216 102,204 78,180 66,150 64,126"></polyline>
+              <polyline class="sb-land" points="360,122 394,102 438,92 476,98 518,114 550,138 572,170 566,196 542,214 504,228 460,230 420,218 390,198 368,172 360,122"></polyline>
+              <rect class="sb-cap" x="157" y="157" width="6" height="6"></rect>
+              <rect class="sb-cap" x="483" y="157" width="6" height="6"></rect>
+              <path class="sb-path" d="M160 160 Q323 40 486 160"></path>
+              <rect class="sb-trail" x="-9" y="-9" width="4" height="4"></rect>
+              <rect class="sb-trail" x="-9" y="-9" width="4" height="4"></rect>
+              <rect class="sb-trail" x="-9" y="-9" width="4" height="4"></rect>
+              <rect class="sb-head" x="-9" y="-9" width="5" height="5"></rect>
+              <g class="sb-blast">
+                <circle class="sb-core" cx="486" cy="160" r="0"></circle>
+                <circle class="sb-ring" cx="486" cy="160" r="0"></circle>
+                <circle class="sb-ring" cx="486" cy="160" r="0"></circle>
+                <circle class="sb-ring" cx="486" cy="160" r="0"></circle>
               </g>
-              <g class="rb-sweep">
-                <path d="M0 0 L66 0 A66 66 0 0 0 57.2 -33 Z"></path>
-                <line x1="0" y1="0" x2="66" y2="0"></line>
-              </g>
-              <circle class="rb-blip one" cx="32" cy="-23" r="2.6"></circle>
-              <circle class="rb-blip two" cx="-41" cy="17" r="2.6"></circle>
             </g>
           </svg>
         </div>
@@ -127,8 +126,92 @@ const isRadar = frontmatter.theme === "radar";
     observer.observe(fig);
   }
 
+  function setupStrike() {
+    const band = document.getElementById("strike");
+    if (!band) return;
+
+    const path = band.querySelector<SVGPathElement>(".sb-path");
+    const head = band.querySelector<SVGRectElement>(".sb-head");
+    const trails = Array.from(band.querySelectorAll<SVGRectElement>(".sb-trail"));
+    const blast = band.querySelector<SVGGElement>(".sb-blast");
+    const core = band.querySelector<SVGCircleElement>(".sb-core");
+    const rings = Array.from(band.querySelectorAll<SVGCircleElement>(".sb-ring"));
+    if (!path || !head || !blast || !core) return;
+
+    const total = path.getTotalLength();
+    path.style.strokeDasharray = String(total);
+
+    function place(el: SVGRectElement, t: number) {
+      const size = Number(el.getAttribute("width"));
+      const p = path!.getPointAtLength(Math.max(0, Math.min(1, t)) * total);
+      el.setAttribute("x", String(p.x - size / 2));
+      el.setAttribute("y", String(p.y - size / 2));
+    }
+
+    function draw(progress: number) {
+      path!.style.strokeDashoffset = String(total * (1 - progress));
+      place(head!, progress);
+      trails.forEach((el, i) => place(el, progress - 0.03 * (i + 1)));
+    }
+
+    function blastAt(phase: number) {
+      const r = 8 + phase * 36;
+      core!.setAttribute("r", String(r));
+      rings.forEach((ring, i) => ring.setAttribute("r", String(r * [1.2, 1.8, 2.5][i])));
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      draw(1);
+      blast.style.opacity = "0";
+      return;
+    }
+
+    const FLY = 3000;
+    const BLAST = 900;
+    const FADE = 900;
+    const PAUSE = 1200;
+    const CYCLE = FLY + BLAST + FADE + PAUSE;
+    let start = 0;
+
+    function frame(now: number) {
+      if (!start) start = now;
+      const t = (now - start) % CYCLE;
+
+      if (t < FLY) {
+        draw(t / FLY);
+        path!.style.opacity = "1";
+        head!.style.opacity = "1";
+        trails.forEach((el) => (el.style.opacity = "1"));
+        blast!.style.opacity = "0";
+      } else if (t < FLY + BLAST) {
+        draw(1);
+        head!.style.opacity = "0";
+        trails.forEach((el) => (el.style.opacity = "0"));
+        blast!.style.opacity = "1";
+        blastAt((t - FLY) / BLAST);
+      } else if (t < FLY + BLAST + FADE) {
+        const f = 1 - (t - FLY - BLAST) / FADE;
+        path!.style.opacity = String(f);
+        blast!.style.opacity = String(f);
+      } else {
+        draw(0);
+        path!.style.opacity = "1";
+        blast!.style.opacity = "0";
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    draw(0);
+    blast.style.opacity = "0";
+    window.requestAnimationFrame(frame);
+  }
+
   setupWargame();
-  document.addEventListener("astro:after-swap", setupWargame);
+  setupStrike();
+  document.addEventListener("astro:after-swap", () => {
+    setupWargame();
+    setupStrike();
+  });
 </script>
 
 <style is:global>
@@ -618,74 +701,46 @@ const isRadar = frontmatter.theme === "radar";
     color: #14100a;
   }
 
-  /* decorative radar band */
-  .radar-band {
+  /* decorative strike band */
+  .strike-band {
     margin: 0 0 26px;
-    padding: 6px 0 10px;
+    padding: 10px 0 12px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+    background: #020202;
   }
-  .radar-band svg {
+  .strike-band svg {
     display: block;
     width: 100%;
-    height: 120px;
+    height: 150px;
   }
-  .radar-band .rb-rules line {
-    stroke: var(--line);
-    stroke-width: 1;
-    stroke-dasharray: 2 6;
-  }
-  .radar-band .rb-rings circle {
+  .strike-band .sb-land {
     fill: none;
-    stroke: var(--line-dark);
-    stroke-width: 0.8;
+    stroke: #ececec;
+    stroke-width: 2;
+    stroke-linejoin: round;
   }
-  .radar-band .rb-rings line {
-    stroke: var(--line-dark);
-    stroke-width: 0.8;
-    stroke-dasharray: 2 5;
+  .strike-band .sb-cap {
+    fill: #ececec;
   }
-  .radar-band .rb-sweep path {
-    fill: url(#sweepFade);
+  .strike-band .sb-path {
+    fill: none;
+    stroke: #ececec;
+    stroke-width: 2;
   }
-  .radar-band .rb-sweep line {
-    stroke: var(--accent-2);
+  .strike-band .sb-head {
+    fill: #ececec;
+  }
+  .strike-band .sb-trail {
+    fill: #969696;
+  }
+  .strike-band .sb-core {
+    fill: #ececec;
+  }
+  .strike-band .sb-ring {
+    fill: none;
+    stroke: #ececec;
     stroke-width: 1;
-    opacity: 0.55;
-  }
-  .radar-band .rb-sweep {
-    animation: rb-turn 12s linear infinite;
-    transform-origin: 0 0;
-  }
-  .radar-band .rb-blip {
-    fill: var(--accent-2);
-    opacity: 0;
-    animation: rb-blip 12s linear infinite;
-  }
-  .radar-band .rb-blip.one {
-    animation-delay: -1.2s;
-  }
-  .radar-band .rb-blip.two {
-    animation-delay: -6.7s;
-  }
-  @keyframes rb-turn {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  @keyframes rb-blip {
-    0% { opacity: 0.9; }
-    12% { opacity: 0.35; }
-    35% { opacity: 0; }
-    100% { opacity: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .radar-band .rb-sweep,
-    .radar-band .rb-blip {
-      animation: none;
-    }
-    .radar-band .rb-blip {
-      opacity: 0.7;
-    }
   }
 
   @media (max-width: 620px) {

@@ -28,7 +28,6 @@ const posts = Object.values(modules)
         <span class="featured-label">Latest post</span>
         <span class="featured-title">{posts[0].title}</span>
         <span class="featured-desc">{posts[0].description}</span>
-        <span class="featured-cta">Read it</span>
       </a>
     )}
 
@@ -43,44 +42,42 @@ const posts = Object.values(modules)
 <style>
   .featured {
     display: block;
-    margin: 26px 0 6px;
-    padding: 18px 20px;
-    background: #14171a;
-    color: #f2f0ea;
+    margin: 6px 0 4px;
+    padding: 20px 0 24px;
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--line-dark);
     text-decoration: none;
-    border-left: 3px solid var(--accent);
   }
-  .featured:hover .featured-cta {
+  .featured:hover .featured-title {
     text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.14em;
   }
   .featured-label {
     display: block;
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   .featured-title {
     display: block;
-    font-size: 19px;
-    font-weight: 750;
-    line-height: 1.25;
-    margin-bottom: 8px;
+    max-width: 660px;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 10px;
   }
   .featured-desc {
     display: block;
-    font-size: 14px;
+    max-width: 620px;
+    font-family: var(--serif);
+    font-size: 15px;
     line-height: 1.5;
-    color: #b9b6ad;
-    margin-bottom: 10px;
-  }
-  .featured-cta {
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--accent);
+    color: var(--muted);
   }
 </style>

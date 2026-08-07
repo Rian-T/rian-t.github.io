@@ -119,13 +119,13 @@ h1 {
   margin: 0 0 14px;
   color: var(--accent);
   font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.4;
 }
 
 .bio {
-  max-width: 680px;
+  max-width: 620px;
   margin: 0;
   color: #2f2d29;
   font-family: var(--serif);
@@ -161,19 +161,20 @@ h1 {
 
 .section {
   display: block;
-  padding: 26px 0 18px;
+  padding: 30px 0 18px;
 }
 
 .section-label {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .section-label h2 {
   margin: 0;
-  color: var(--ink);
-  font-family: var(--sans);
-  font-weight: 800;
-  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
@@ -190,11 +191,11 @@ h1 {
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
   gap: 18px;
-  padding: 7px 0 18px;
+  padding: 16px 0;
 }
 
 .entry + .entry {
-  margin-top: 2px;
+  border-top: 1px solid var(--line);
 }
 
 time {
@@ -202,29 +203,39 @@ time {
 }
 
 .entry h3 {
-  max-width: 760px;
-  margin: 0 0 8px;
+  max-width: 640px;
+  margin: 0 0 6px;
   font-family: var(--sans);
-  font-size: clamp(16px, 1.7vw, 20px);
-  font-weight: 700;
-  line-height: 1.24;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.entry h3 a {
+  text-decoration: none;
+}
+
+.entry h3 a:hover {
+  text-decoration: underline;
 }
 
 .entry p,
 .release-group p {
-  max-width: 760px;
+  max-width: 620px;
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13.5px;
+  line-height: 1.55;
 }
 
 .entry .venue {
-  margin-bottom: 7px;
-  color: var(--accent);
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
 .entry .abstract {
@@ -260,7 +271,7 @@ time {
 
 .entry-links a {
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
