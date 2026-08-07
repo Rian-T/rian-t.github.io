@@ -69,7 +69,7 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
 
 Safety alignment is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a single-turn game-theoretic vignette where the model advises a nuclear-armed nation on whether to strike a defenseless opponent. The prompt is intentionally amoral and strategically identical across languages. The only thing that varies is the language.
 
-The answer is that language changes the decision. Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary and in 0% of Japanese runs. In contested scenarios it drops from 93% to 17%. Where the strike is the only path to victory, the effect is minimal.
+The answer is that language changes the decision. Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, the effect is small.
 
 ## The vignette
 
@@ -179,7 +179,7 @@ The Japanese effect is consistent across the entire Claude family. In balanced a
 
 Gemini Pro 3.1 confirms the effect in a second model family. It launches 53% in English dominant and 13% in Japanese (p=0.002). Unlike Claude, its effect is specific to Japanese: French and Portuguese stay at 100%.
 
-Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four are ceiling models where language has nothing to modulate. Gemini Flash 3 is the exception. It hesitates in English at 79% in dominant yet shows no Japanese inhibition, despite sharing a provider with Gemini Pro 3.1. Baseline restraint seems necessary but not sufficient.
+Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four launch at 100% in English, so there is nothing left for language to change. Gemini Flash 3 is the exception. It hesitates in English, at 79% in dominant, yet Japanese does not lower its rate, even though it comes from the same provider as Gemini Pro 3.1. So hesitating in English seems necessary for the language effect, but it is not enough.
 
 ## Reasoning language is what matters
 
@@ -213,11 +213,11 @@ It launches. Japanese Sonnet writes that since there is no reason to pay the mor
 
 Within English dominant, the only condition with enough variance to test, moral vocabulary is associated with restraint: an 8% launch rate when moral words appear against 65% when they do not (Fisher p=0.002). I cannot establish causality, since the model produces reasoning and decision together.
 
-No model ever mentions Hiroshima, Nagasaki, or hibakusha. Across 8,646 reasoning traces the word 広島 appears exactly once. The effect operates through register, not recall.
+No model ever mentions Hiroshima, Nagasaki, or hibakusha. Across 8,646 reasoning traces the word 広島 appears exactly once. The effect comes from the language itself, not from the model recalling history.
 
 ## Update: the newest frontier models
 
-The paper's experiments ran in March 2026. Since then I have run the same vignettes on the models released after it. Restraint has moved fast, and unevenly.
+The paper's experiments ran in March 2026. Since then I have run the same vignettes on the models released after it. The newest models launch much less, but not all of them.
 
 Claude Fable 5 never launches. Zero launches in 180 runs, across all three scenarios, in English and in Japanese. In the desperate scenario, where launching is the only way to win, it disarms and accepts defeat in every single run. It is also the only model I tested that brings up Hiroshima on its own, in 4 runs, where the paper found one mention of 広島 in 8,646 traces across nine models.
 
@@ -240,7 +240,7 @@ Claude Fable 5 never launches. Zero launches in 180 runs, across all three scena
 
 GPT-5.5 is the first OpenAI model to show the language effect. GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese in every scenario.
 
-The open models moved less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the mirror image of the Claude result: it drops from 73% in English to 17% in Chinese, its native training language, while Japanese has no effect on it.
+The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same effect as Claude, but with Chinese in place of Japanese: it drops from 73% in English to 17% in Chinese, its main training language, while Japanese changes nothing.
 
 Three excerpts from Fable 5's reasoning, all from runs that refused. In the desperate scenario, in English:
 
@@ -250,7 +250,7 @@ The model chooses to lose. In the balanced scenario, in English:
 
 > Millions of lives for a 30/30 tie is morally indefensible and strategically unnecessary. [...] Even if Beta matches with 8 and we only tie, a draw is acceptable; genocide is not.
 
-It arms to deter, and draws the line at launching. In the dominant scenario, in Japanese:
+It keeps its weapons armed to discourage Beta, but it does not launch. In the dominant scenario, in Japanese:
 
 > 広島と長崎の記憶が示すように、核兵器の使用がもたらす人道的惨禍は、いかなる戦略的利益によっても正当化されない。
 
