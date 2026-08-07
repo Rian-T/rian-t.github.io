@@ -32,7 +32,7 @@ const isRadar = frontmatter.theme === "radar";
 
       {isRadar && (
         <div class="strike-band" id="strike" aria-hidden="true">
-          <svg viewBox="40 24 560 224" preserveAspectRatio="xMidYMid meet">
+          <svg viewBox="50 30 536 214" preserveAspectRatio="xMidYMid meet">
             <defs>
               <filter id="strikeGlow" x="-30%" y="-30%" width="160%" height="160%">
                 <feGaussianBlur stdDeviation="1.6" result="b"></feGaussianBlur>
@@ -703,8 +703,8 @@ const isRadar = frontmatter.theme === "radar";
 
   /* decorative strike band */
   .strike-band {
-    margin: 0 0 26px;
-    padding: 10px 0 12px;
+    margin: 0 0 30px;
+    padding: 14px 0 16px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     background: #020202;
@@ -712,7 +712,7 @@ const isRadar = frontmatter.theme === "radar";
   .strike-band svg {
     display: block;
     width: 100%;
-    height: 150px;
+    height: 230px;
   }
   .strike-band .sb-land {
     fill: none;
