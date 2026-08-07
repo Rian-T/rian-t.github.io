@@ -18,7 +18,7 @@ const posts = Object.values(modules)
   .sort((a, b) => (a.year < b.year ? 1 : -1));
 ---
 
-<BaseLayout title="Rian Touchent">
+<BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly in medicine.">
   <main class="shell shell-narrow">
     <Header />
     <ProfileIntro />
@@ -28,6 +28,7 @@ const posts = Object.values(modules)
         <span class="featured-label">Latest post</span>
         <span class="featured-title">{posts[0].title}</span>
         <span class="featured-desc">{posts[0].description}</span>
+        <span class="featured-stats">9 models · 4 languages · 3,600 runs · TrustNLP @ ACL 2026</span>
       </a>
     )}
 
@@ -78,5 +79,14 @@ const posts = Object.values(modules)
     font-size: 15px;
     line-height: 1.5;
     color: var(--muted);
+  }
+  .featured-stats {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--quiet);
   }
 </style>

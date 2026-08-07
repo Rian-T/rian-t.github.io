@@ -19,6 +19,8 @@ const displayDate = new Date(frontmatter.date)
 <BaseLayout
   title={`${frontmatter.title} — Rian Touchent`}
   bodyClass={isRadar ? "theme-radar" : undefined}
+  description={frontmatter.description}
+  ogImage={isRadar ? "/media/strike_poster.jpg" : undefined}
 >
   <main class="shell">
     <header class="top">

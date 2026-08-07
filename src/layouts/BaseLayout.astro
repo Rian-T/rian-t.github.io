@@ -4,9 +4,13 @@ import "../styles/global.css";
 interface Props {
   title: string;
   bodyClass?: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title, bodyClass } = Astro.props;
+const { title, bodyClass, description, ogImage } = Astro.props;
+const site = "https://rian-t.github.io";
+const ogImageUrl = ogImage ? site + ogImage : undefined;
 ---
 
 <!doctype html>
@@ -20,6 +24,13 @@ const { title, bodyClass } = Astro.props;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    {description && <meta name="description" content={description} />}
+    {description && <meta property="og:description" content={description} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:card" content="summary_large_image" />}
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
   </head>
   <body class={bodyClass}>
     <slot />

@@ -13,6 +13,7 @@ export const profile = {
   },
   links: [
     { label: "GitHub", href: "https://github.com/Rian-T" },
+    { label: "Hugging Face", href: "https://huggingface.co/rntc" },
     { label: "Email", href: "#", isEmail: true },
     { label: "CV", href: "/resume.pdf" },
   ],
