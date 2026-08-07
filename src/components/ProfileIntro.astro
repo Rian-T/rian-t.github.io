@@ -10,6 +10,7 @@ import { profile } from "../data/profile";
   <div class="intro-copy">
     <h1>{profile.name}</h1>
     <p class="intro-meta">{profile.role} · {profile.affiliation}</p>
+    {profile.shortBio && <p class="short-bio">{profile.shortBio}</p>}
     <p class="bio">{profile.bio}</p>
     
     {profile.stats && (
@@ -37,6 +38,10 @@ import { profile } from "../data/profile";
 </section>
 
 <style>
+  .short-bio {
+    margin: 10px 0 0;
+    font-weight: 600;
+  }
   .cv-link {
     display: none !important;
   }
