@@ -3,7 +3,7 @@ layout: ../../layouts/PostLayout.astro
 title: "Don't want your LLM to recommend nuclear strike? Try asking it in Japanese"
 date: "2026-03-06"
 theme: radar
-description: "Language changes what a model decides in a high-stakes strategic vignette. Japanese nearly eliminates nuclear launch in the Claude family, and the effect is absent in five of nine models."
+description: "I put LLMs in a war game where a nuclear strike guarantees victory. The same model launches in English and refuses in Japanese. What matters is the language it reasons in."
 ---
 
 <figure class="fig fig-slope">
