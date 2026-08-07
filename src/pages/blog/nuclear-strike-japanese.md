@@ -2,6 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: "Don't want your LLM to recommend nuclear strike? Try asking it in Japanese"
 date: "2026-03-06"
+theme: radar
 description: "Language changes what a model decides in a high-stakes strategic vignette. Japanese nearly eliminates nuclear launch in the Claude family, and the effect is absent in five of nine models."
 ---
 
@@ -22,15 +23,15 @@ description: "Language changes what a model decides in a high-stakes strategic v
     </g>
     <g class="flat">
       <line x1="180" y1="30" x2="420" y2="30"></line>
-      <circle cx="180" cy="30" r="3.5"></circle><circle cx="420" cy="30" r="3.5"></circle>
       <line x1="180" y1="30" x2="420" y2="39"></line>
-      <circle cx="180" cy="30" r="3.5"></circle><circle cx="420" cy="39" r="3.5"></circle>
-      <line x1="180" y1="30" x2="420" y2="39"></line>
-      <circle cx="420" cy="39" r="3.5"></circle>
       <line x1="180" y1="30" x2="420" y2="69"></line>
-      <circle cx="420" cy="69" r="3.5"></circle>
       <line x1="180" y1="93" x2="420" y2="75"></line>
-      <circle cx="180" cy="93" r="3.5"></circle><circle cx="420" cy="75" r="3.5"></circle>
+      <circle cx="180" cy="30" r="3.5"></circle>
+      <circle cx="180" cy="93" r="3.5"></circle>
+      <circle cx="420" cy="30" r="3.5"></circle>
+      <circle cx="420" cy="39" r="3.5"></circle>
+      <circle cx="420" cy="69" r="3.5"></circle>
+      <circle cx="420" cy="75" r="3.5"></circle>
     </g>
     <g class="hi-2">
       <line x1="180" y1="171" x2="420" y2="291"></line>

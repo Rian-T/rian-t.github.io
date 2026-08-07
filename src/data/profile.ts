@@ -5,7 +5,7 @@ export const profile = {
   shortBio:
     "I evaluate LLMs in high-stakes settings, mainly clinical text and strategic decision-making.",
   bio:
-    "My PhD is on information extraction from clinical reports using LLMs. I built CamemBERT-bio and ModernCamemBERT-bio, French biomedical language models. My recent work looks at how LLMs behave under strategic pressure: the language a model reasons in changes its decisions in a simulated nuclear crisis (TrustNLP 2026).",
+    "My PhD is on information extraction from clinical reports using LLMs. I built CamemBERT-bio and ModernCamemBERT-bio, French biomedical language models.",
   stats: {
     citations: 78,
     hIndex: 5,

@@ -23,6 +23,15 @@ const posts = Object.values(modules)
     <Header />
     <ProfileIntro />
 
+    {posts[0] && (
+      <a class="featured" href={posts[0].href}>
+        <span class="featured-label">Latest post</span>
+        <span class="featured-title">{posts[0].title}</span>
+        <span class="featured-desc">{posts[0].description}</span>
+        <span class="featured-cta">Read it</span>
+      </a>
+    )}
+
     <div class="content-stack">
       <SectionList id="articles" title="Articles" entries={articles} />
       <SectionList id="blog" title="Blog" entries={posts} />
@@ -30,3 +39,48 @@ const posts = Object.values(modules)
     </div>
   </main>
 </BaseLayout>
+
+<style>
+  .featured {
+    display: block;
+    margin: 26px 0 6px;
+    padding: 18px 20px;
+    background: #14171a;
+    color: #f2f0ea;
+    text-decoration: none;
+    border-left: 3px solid var(--accent);
+  }
+  .featured:hover .featured-cta {
+    text-decoration: underline;
+  }
+  .featured-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .featured-title {
+    display: block;
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .featured-desc {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #b9b6ad;
+    margin-bottom: 10px;
+  }
+  .featured-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+  }
+</style>
