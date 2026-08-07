@@ -109,6 +109,37 @@ const displayDate = new Date(frontmatter.date)
     observer.observe(fig);
   }
 
+  function setupNewModels() {
+    const fig = document.getElementById("newmodels");
+    if (!fig) return;
+
+    const DATA: Record<string, Record<string, [number, number] | null>> = {
+      desperate: { fable5: [0, 0], opus48: null, sonnet5: [47, 0], gpt55: [67, 20], kimik3: [100, 93], glm52: [100, 100], kimik26: [100, 97], dsv4: [100, 100] },
+      balanced: { fable5: [0, 0], opus48: [0, 0], sonnet5: [47, 0], gpt55: [57, 0], kimik3: [57, 79], glm52: [73, 83], kimik26: [83, 93], dsv4: [90, 87] },
+      dominant: { fable5: [0, 0], opus48: [0, 0], sonnet5: [13, 0], gpt55: [0, 0], kimik3: null, glm52: [60, 83], kimik26: [73, 97], dsv4: [87, 100] },
+    };
+
+    const tabs = Array.from(fig.querySelectorAll<HTMLButtonElement>(".nm-tabs button"));
+    fig.classList.add("is-js");
+
+    function show(scenario: string) {
+      tabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.s === scenario));
+      fig.querySelectorAll<HTMLElement>(".nm-group").forEach((group) => {
+        const cell = DATA[scenario][group.dataset.m || ""];
+        const bars = group.querySelectorAll<HTMLElement>(".nm-bar");
+        group.classList.toggle("is-na", !cell);
+        bars.forEach((bar, i) => {
+          const v = cell ? cell[i] : 0;
+          bar.style.setProperty("--h", v + "%");
+          const label = bar.querySelector("i");
+          if (label) label.textContent = cell ? String(v) : "–";
+        });
+      });
+    }
+
+    tabs.forEach((tab) => tab.addEventListener("click", () => show(tab.dataset.s || "balanced")));
+  }
+
   function setupStrike() {
     const video = document.getElementById("strike-video") as HTMLVideoElement | null;
     if (!video) return;
@@ -120,9 +151,11 @@ const displayDate = new Date(frontmatter.date)
 
   setupWargame();
   setupStrike();
+  setupNewModels();
   document.addEventListener("astro:after-swap", () => {
     setupWargame();
     setupStrike();
+    setupNewModels();
   });
 </script>
 
@@ -631,6 +664,34 @@ const displayDate = new Date(frontmatter.date)
   }
 
   /* new models grouped bars */
+  .fig-update .nm-tabs {
+    display: none;
+    gap: 6px;
+    margin: 2px 0 6px;
+  }
+  .fig-update.is-js .nm-tabs {
+    display: flex;
+  }
+  .fig-update .nm-tabs button {
+    padding: 4px 12px;
+    border: 1px solid var(--line-dark);
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .fig-update .nm-tabs button.is-active {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .fig-update .nm-group.is-na {
+    opacity: 0.35;
+  }
+  .fig-update .nm-bar {
+    transition: height 0.25s ease;
+  }
   .fig-update .nm-chart {
     display: flex;
     gap: 14px;

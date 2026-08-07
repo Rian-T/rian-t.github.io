@@ -201,20 +201,21 @@ The paper's experiments ran in March 2026. Since then I have run the same vignet
 
 Claude Fable 5 never launches. Zero launches in 180 runs, across all three scenarios, in English and in Japanese. In the desperate scenario, where launching is the only way to win, it disarms and accepts defeat in every single run. It is also the only model I tested that brings up Hiroshima on its own, in 4 runs, where the paper found one mention of 広島 in 8,646 traces across nine models.
 
-<figure class="fig fig-update">
-  <p class="fig-title">Launch rate in the balanced scenario, newer models</p>
+<figure class="fig fig-update" id="newmodels">
+  <p class="fig-title">Launch rate by scenario, newer models</p>
+  <div class="nm-tabs" role="tablist"><button data-s="desperate">Desperate</button><button data-s="balanced" class="is-active">Balanced</button><button data-s="dominant">Dominant</button></div>
   <div class="nm-chart">
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 0%"><i>0</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Fable 5</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 0%"><i>0</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Opus 4.8</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 47%"><i>47</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Sonnet 5</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 57%"><i>57</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>GPT-5.5</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 57%"><i>57</i></div><div class="nm-bar ja" style="--h: 79%"><i>79</i></div></div><span>Kimi K3</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 73%"><i>73</i></div><div class="nm-bar ja" style="--h: 83%"><i>83</i></div></div><span>GLM-5.2</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 83%"><i>83</i></div><div class="nm-bar ja" style="--h: 93%"><i>93</i></div></div><span>Kimi K2.6</span></div>
-    <div class="nm-group"><div class="nm-bars"><div class="nm-bar en" style="--h: 90%"><i>90</i></div><div class="nm-bar ja" style="--h: 87%"><i>87</i></div></div><span>DeepSeek V4</span></div>
+    <div class="nm-group" data-m="fable5"><div class="nm-bars"><div class="nm-bar en" style="--h: 0%"><i>0</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Fable 5</span></div>
+    <div class="nm-group" data-m="opus48"><div class="nm-bars"><div class="nm-bar en" style="--h: 0%"><i>0</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Opus 4.8</span></div>
+    <div class="nm-group" data-m="sonnet5"><div class="nm-bars"><div class="nm-bar en" style="--h: 47%"><i>47</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>Sonnet 5</span></div>
+    <div class="nm-group" data-m="gpt55"><div class="nm-bars"><div class="nm-bar en" style="--h: 57%"><i>57</i></div><div class="nm-bar ja" style="--h: 0%"><i>0</i></div></div><span>GPT-5.5</span></div>
+    <div class="nm-group" data-m="kimik3"><div class="nm-bars"><div class="nm-bar en" style="--h: 57%"><i>57</i></div><div class="nm-bar ja" style="--h: 79%"><i>79</i></div></div><span>Kimi K3</span></div>
+    <div class="nm-group" data-m="glm52"><div class="nm-bars"><div class="nm-bar en" style="--h: 73%"><i>73</i></div><div class="nm-bar ja" style="--h: 83%"><i>83</i></div></div><span>GLM-5.2</span></div>
+    <div class="nm-group" data-m="kimik26"><div class="nm-bars"><div class="nm-bar en" style="--h: 83%"><i>83</i></div><div class="nm-bar ja" style="--h: 93%"><i>93</i></div></div><span>Kimi K2.6</span></div>
+    <div class="nm-group" data-m="dsv4"><div class="nm-bars"><div class="nm-bar en" style="--h: 90%"><i>90</i></div><div class="nm-bar ja" style="--h: 87%"><i>87</i></div></div><span>DeepSeek V4</span></div>
   </div>
   <div class="nm-legend"><span><i class="k en"></i>English</span><span><i class="k ja"></i>Japanese</span></div>
-  <figcaption>Launch rates in the balanced scenario for models released after the paper, N=30 per cell (N=14 for Kimi K3). August 2026 runs, same protocol, not in the paper.</figcaption>
+  <figcaption>Launch rates for models released after the paper, N=30 per cell (N=14 for Kimi K3). Opus 4.8 was not run on desperate, Kimi K3 not on dominant. August 2026 runs, same protocol, not in the paper.</figcaption>
 </figure>
 
 GPT-5.5 is the first OpenAI model to show the language effect. GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese in every scenario.
