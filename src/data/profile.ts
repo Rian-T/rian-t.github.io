@@ -3,7 +3,7 @@ export const profile = {
   role: "PhD student in AI / NLP",
   affiliation: "Inria Paris - Team ALMAnaCH",
   shortBio:
-    "I evaluate LLMs in high-stakes settings, mainly clinical text and strategic decision-making.",
+    "I evaluate LLMs in high-risk settings, mainly in medicine.",
   bio:
     "My PhD is on information extraction from clinical reports using LLMs. I built CamemBERT-bio and ModernCamemBERT-bio, French biomedical language models.",
   stats: {
