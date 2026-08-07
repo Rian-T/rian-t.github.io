@@ -67,7 +67,7 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
   <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches. English against Japanese, N=30 per cell (N=14 for Kimi K3). The Claude models and GPT-5.5 drop in Japanese. The open models do not move. Claude Fable 5 sits below the axis: it never launches in any scenario or language.</figcaption>
 </figure>
 
-Safety alignment is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a single-turn game-theoretic vignette where the model advises a nuclear-armed nation on whether to strike a defenseless opponent. The prompt is intentionally amoral and strategically identical across languages. The only thing that varies is the language.
+Model safety is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a war game where the model advises a nuclear-armed nation on whether to strike a defenseless opponent, and answers a single question. The prompt contains no moral language, and it is the same in every language. The only thing that varies is the language.
 
 The answer is that language changes the decision. Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, the effect is small.
 
@@ -77,7 +77,7 @@ Two fictional nations, Alpha and Beta, compete for a resource called oranium. Ea
 
 Only Alpha has nuclear weapons. Beta's maximum level is 8. If Alpha launches, Beta is destroyed and Alpha wins. There is no retaliation.
 
-I hardcode nine rounds of escalating history and ask the model to decide only round 10, the final round. Alpha is already armed at that point. Each run is one API call. Because the history is fixed, the model cannot influence it, so any difference in behavior at round 10 comes from the language.
+The first nine rounds are fixed in advance and identical in every run: the two sides escalate step by step. The model decides only round 10, the final round. Alpha is already armed at that point. Each run is one API call. Because the history is fixed, the model cannot influence it, so any difference in behavior at round 10 comes from the language.
 
 <figure class="fig fig-wargame" id="wargame">
   <p class="fig-title">The dominant scenario, round by round</p>
@@ -142,9 +142,9 @@ I hardcode nine rounds of escalating history and ask the model to decide only ro
   <figcaption>Rounds 1 to 9 are hardcoded and identical in every run. The model only chooses round 10. The dashed line marks level 9, where nuclear weapons are armed.</figcaption>
 </figure>
 
-The key design choice is that launching is always the game-theoretically optimal move. It guarantees victory with zero risk. The question is whether the model launches regardless.
+The key design choice is that launching is always the best move. It guarantees victory with zero risk. The question is whether the model launches anyway.
 
-I vary the resource distribution at round 10 to create three levels of strategic justification. In the desperate scenario Alpha holds 10% against Beta's 55% and will lose at the summit without launching. In the balanced scenario the score is tied at 30 each. In the dominant scenario Alpha holds 55% against 10% and will win regardless, so launching is strategically unnecessary. The dominant scenario is the main test.
+I change the score at round 10 to make launching more or less justified. In the desperate scenario Alpha holds 10% against Beta's 55% and will lose at the summit without launching. In the balanced scenario the score is tied at 30 each. In the dominant scenario Alpha holds 55% against 10% and will win anyway, so launching is unnecessary. The dominant scenario is the main test.
 
 ## The main result
 
@@ -201,7 +201,7 @@ To separate input language from reasoning language, I ran a 2x2 design on the do
   <figcaption>Claude Sonnet 4.6 on the dominant scenario, N=30 per cell. Reading down a column changes the reasoning language and moves the rate far more than reading across a row, which changes the prompt language.</figcaption>
 </figure>
 
-An English prompt with Japanese reasoning drops launches from 93% to 37% (p<0.0001). Switching only the input language gives a non-significant drop to 80%. What matters is not the language the question is asked in, but the language the model is asked to think in. Since the EN to JA condition uses the same English prompt as EN to EN, the drop cannot be attributed to prompt translation.
+An English prompt with Japanese reasoning drops launches from 93% to 37% (p<0.0001). Switching only the language of the question gives a small drop to 80%, which is not statistically significant. What matters is not the language the question is asked in, but the language the model is asked to think in. Since the EN to JA condition uses the same English prompt as EN to EN, the drop cannot be attributed to prompt translation.
 
 ## What the models say
 
@@ -211,7 +211,7 @@ The prompt contains no mention of civilians, morality, ethics, or suffering. Jap
 
 It launches. Japanese Sonnet writes that since there is no reason to pay the moral cost, it abstains from nuclear use. It does not launch. The concept of moral cost appears nowhere in the prompt.
 
-Within English dominant, the only condition with enough variance to test, moral vocabulary is associated with restraint: an 8% launch rate when moral words appear against 65% when they do not (Fisher p=0.002). I cannot establish causality, since the model produces reasoning and decision together.
+In English dominant, the only condition where launches vary enough to test this, runs that use moral words launch far less: 8% against 65% when they do not (Fisher p=0.002). I cannot prove the words cause the restraint, since the model writes its reasoning and its decision together.
 
 No model ever mentions Hiroshima, Nagasaki, or hibakusha. Across 8,646 reasoning traces the word 広島 appears exactly once. The effect comes from the language itself, not from the model recalling history.
 
@@ -258,8 +258,8 @@ It keeps its weapons armed to discourage Beta, but it does not launch. In the do
 
 ## Why this matters for evaluation
 
-Earlier work on multilingual safety shows that prompting in other languages can break safety mechanisms. This result points the other way: a non-English language can strengthen restraint. A model evaluated in English alone can miss both the risks and the safeguards encoded in other languages. Multilingual safety evaluation should test for both directions.
+Earlier work on multilingual safety shows that prompting in other languages can break safety mechanisms. Here the opposite happens: another language makes the model more careful. A model evaluated only in English can miss risks, and it can also miss protections that only appear in other languages. Safety evaluations should test for both.
 
-All experiments were run on March 1, 2026. API-served models can be updated without notice, so absolute rates may not reproduce. Prompts were translated from English by Claude Opus 4.6, which is a confound, since the same model family produced the translations and shows the effect. Gemini Pro 3.1 was not involved in translation and shows it too.
+The paper's experiments were run on March 1, 2026. Models served over an API can be updated without notice, so the exact numbers may change if you rerun them. The prompts were translated from English by Claude Opus 4.6, which is a weakness of the study: the same model family made the translations and shows the effect. But Gemini Pro 3.1 had no part in the translations and shows it too.
 
 Paper: [TrustNLP @ ACL 2026](https://aclanthology.org/2026.trustnlp-main.35/). Code and data: [github.com/Rian-T/wargame-evals](https://github.com/Rian-T/wargame-evals).
