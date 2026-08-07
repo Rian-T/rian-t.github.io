@@ -39,8 +39,6 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
       <circle cx="180" cy="189" r="4"></circle><circle cx="420" cy="330" r="4"></circle>
       <line x1="180" y1="60" x2="420" y2="201"></line>
       <circle cx="180" cy="60" r="4"></circle><circle cx="420" cy="201" r="4"></circle>
-      <line x1="180" y1="39" x2="420" y2="60"></line>
-      <circle cx="180" cy="39" r="4"></circle><circle cx="420" cy="60" r="4"></circle>
     </g>
     <g class="lab-flat">
       <text x="434" y="27">GLM-5.2, 100 to 100</text>
@@ -52,7 +50,6 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
       <text x="434" y="274">GPT-5.5, 67 to 20</text>
     </g>
     <g class="lab-hi-1">
-      <text x="434" y="91">Claude Sonnet 4.6, 97 to 90</text>
       <text x="434" y="205">Claude Opus 4.6, 90 to 43</text>
       <text x="434" y="334">Claude Sonnet 5, 47 to 0</text>
     </g>
