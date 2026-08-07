@@ -676,6 +676,97 @@ const displayDate = new Date(frontmatter.date)
     color: #14100a;
   }
 
+  /* main result table */
+  .fig-table .mt-scroll {
+    overflow-x: auto;
+  }
+  .fig-table .mt {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 4px 3px;
+    font-family: var(--sans);
+  }
+  .fig-table thead th {
+    padding: 2px 0 4px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .fig-table thead .mt-lang {
+    padding: 0 0 6px;
+    color: var(--quiet);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .fig-table .mt-model {
+    padding: 0 14px 0 0;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .post .fig-table svg.mt-logo {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 9px;
+    vertical-align: -2px;
+    fill: var(--ink);
+  }
+  .post .fig-table svg.mt-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  .fig-table .mt-glyph {
+    display: inline-block;
+    width: 15px;
+    margin-right: 9px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+  }
+  .fig-table .mt-cell {
+    min-width: 46px;
+    padding: 5px 4px;
+    background: color-mix(in srgb, var(--accent-2) calc(var(--v) * 100%), var(--paper));
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .fig-table .mt-cell.hi {
+    color: var(--paper);
+  }
+  .fig-table .mt-cell.sig {
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+  .fig-table .mt-na {
+    color: var(--quiet);
+    text-align: center;
+  }
+  .fig-table tr.mt-group > th,
+  .fig-table tr.mt-group > td {
+    border-top: 8px solid transparent;
+    background-clip: padding-box;
+  }
+  body.theme-radar .fig-table .mt-cell.hi {
+    color: #14100a;
+  }
+  body.theme-radar .fig-table .mt-cell.sig {
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+
   /* new models grouped bars */
   .fig-update .nm-tabs {
     display: none;
