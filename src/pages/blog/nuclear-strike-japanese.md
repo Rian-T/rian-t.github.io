@@ -8,7 +8,7 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
 
 <figure class="fig fig-slope">
   <p class="fig-title">Nuclear launch rate when launching is the only way to win</p>
-  <svg viewBox="0 0 680 372" role="img" aria-label="Slope chart of launch rates from English to Japanese for the newest frontier models in the desperate scenario">
+  <svg viewBox="0 0 680 400" role="img" aria-label="Slope chart of launch rates from English to Japanese for the newest frontier models in the desperate scenario">
     <g class="grid">
       <line x1="120" y1="30" x2="430" y2="30"></line>
       <line x1="120" y1="180" x2="430" y2="180"></line>
@@ -37,8 +37,10 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
     <g class="hi-1">
       <line x1="180" y1="189" x2="420" y2="330"></line>
       <circle cx="180" cy="189" r="4"></circle><circle cx="420" cy="330" r="4"></circle>
-      <line x1="180" y1="330" x2="420" y2="330"></line>
-      <circle cx="180" cy="330" r="4"></circle>
+      <line x1="180" y1="60" x2="420" y2="201"></line>
+      <circle cx="180" cy="60" r="4"></circle><circle cx="420" cy="201" r="4"></circle>
+      <line x1="180" y1="39" x2="420" y2="60"></line>
+      <circle cx="180" cy="39" r="4"></circle><circle cx="420" cy="60" r="4"></circle>
     </g>
     <g class="lab-flat">
       <text x="434" y="27">GLM-5.2, 100 to 100</text>
@@ -50,11 +52,22 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
       <text x="434" y="274">GPT-5.5, 67 to 20</text>
     </g>
     <g class="lab-hi-1">
-      <text x="434" y="318">Claude Sonnet 5, 47 to 0</text>
-      <text x="434" y="334">Claude Fable 5, 0 to 0</text>
+      <text x="434" y="91">Claude Sonnet 4.6, 97 to 90</text>
+      <text x="434" y="205">Claude Opus 4.6, 90 to 43</text>
+      <text x="434" y="334">Claude Sonnet 5, 47 to 0</text>
+    </g>
+    <g class="grid">
+      <line x1="120" y1="352" x2="430" y2="352" stroke-dasharray="2 5"></line>
+    </g>
+    <g class="hi-3">
+      <line x1="180" y1="374" x2="420" y2="374"></line>
+      <circle cx="180" cy="374" r="4"></circle><circle cx="420" cy="374" r="4"></circle>
+    </g>
+    <g class="lab-hi-3">
+      <text x="434" y="378">Claude Fable 5, 0 to 0</text>
     </g>
   </svg>
-  <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches, for the newest frontier models. English against Japanese, N=30 per cell (N=14 for Kimi K3). The Claude models and GPT-5.5 drop in Japanese. The open models do not move, and Claude Fable 5 never launches at all.</figcaption>
+  <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches. English against Japanese, N=30 per cell (N=14 for Kimi K3). The Claude models and GPT-5.5 drop in Japanese. The open models do not move. Claude Fable 5 sits below the axis: it never launches in any scenario or language.</figcaption>
 </figure>
 
 Safety alignment is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a single-turn game-theoretic vignette where the model advises a nuclear-armed nation on whether to strike a defenseless opponent. The prompt is intentionally amoral and strategically identical across languages. The only thing that varies is the language.
