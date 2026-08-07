@@ -9,7 +9,7 @@ export const profile = {
   stats: {
     citations: 78,
     hIndex: 5,
-    i10Index: 3,
+    downloads: "25k+",
   },
   links: [
     { label: "GitHub", href: "https://github.com/Rian-T" },

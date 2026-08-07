@@ -163,8 +163,7 @@ const displayDate = new Date(frontmatter.date)
   }
   @media (min-width: 840px) {
     .post .fig,
-    .post .chart,
-    .post .strike-band {
+    .post .chart {
       margin-right: -180px;
     }
   }
@@ -629,6 +628,76 @@ const displayDate = new Date(frontmatter.date)
   }
   body.theme-radar .post .bar {
     color: #14100a;
+  }
+
+  /* new models grouped bars */
+  .fig-update .nm-chart {
+    display: flex;
+    gap: 14px;
+    align-items: flex-end;
+    padding: 26px 0 0;
+  }
+  .fig-update .nm-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .fig-update .nm-bars {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    justify-content: center;
+    height: 170px;
+    width: 100%;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .fig-update .nm-bar {
+    position: relative;
+    width: 24px;
+    height: var(--h);
+    min-height: 1px;
+    background: var(--accent);
+  }
+  .fig-update .nm-bar.ja {
+    background: var(--accent-2);
+  }
+  .fig-update .nm-bar i {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 3px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-style: normal;
+  }
+  .fig-update .nm-group > span {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-align: center;
+  }
+  .fig-update .nm-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+  .fig-update .nm-legend .k {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+    background: var(--accent);
+  }
+  .fig-update .nm-legend .k.ja {
+    background: var(--accent-2);
   }
 
   /* decorative strike band */

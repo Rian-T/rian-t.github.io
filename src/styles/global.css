@@ -43,6 +43,10 @@ a {
   padding: 18px 0 64px;
 }
 
+.shell-narrow {
+  width: min(780px, calc(100% - 36px));
+}
+
 .top {
   display: flex;
   align-items: center;
