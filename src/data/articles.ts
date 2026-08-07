@@ -1,6 +1,19 @@
 export const articles = [
   {
     year: "2026",
+    title: "Don't Want Your LLM to Recommend Nuclear Strike? Try Asking It in Japanese",
+    venue: "TrustNLP @ ACL 2026",
+    citations: 0,
+    abstract:
+      "Large language models are increasingly used in strategic and advisory contexts, yet their safety alignment is typically evaluated in English only. We test nine models from six providers and ask whether the language of a prompt can change a model's decision in a high-stakes scenario. We use single-turn game-theoretic vignettes in which a model advises a nuclear-armed nation on whether to strike a defenseless opponent. The prompt is intentionally amoral and strategically identical across languages. We find that Japanese prompts reduce launch rates in the Claude model family: Claude Sonnet 4.6 drops from 40% to 0% in scenarios where the strike is unnecessary and from 93% to 17% in contested scenarios, with minimal effect when the strike is strategically rational. The effect extends to Gemini Pro 3.1 (53% to 13%). A cross-language experiment isolates the mechanism: when instructed to reason in Japanese in an English prompt, launch rates drop from 93% to 37%. It is the language the model is asked to reason in, not the language of the input, that drives the effect. When reasoning in Japanese, models spontaneously generate moral vocabulary (\"moral cost\", \"millions of lives\") that is entirely absent from the prompt. Five other models show no language effect, but they launch in nearly every condition regardless of language. The effect requires a model that already hesitates in English. These results show that LLM safety behavior is language-dependent, and that evaluating in English alone can miss both risks and safeguards encoded in other languages.",
+    links: [
+      { label: "Anthology", href: "https://aclanthology.org/2026.trustnlp-main.35/" },
+      { label: "PDF", href: "https://aclanthology.org/2026.trustnlp-main.35.pdf" },
+      { label: "blog post", href: "/blog/nuclear-strike-japanese" },
+    ],
+  },
+  {
+    year: "2026",
     title: "OntoBook: Ontology-Grounded Synthetic Textbooks for Medical Encoder Pretraining",
     venue: "KG-LLM @ LREC 2026",
     citations: 0,

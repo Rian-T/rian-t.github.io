@@ -3,7 +3,7 @@ export const profile = {
   role: "PhD student in AI / NLP",
   affiliation: "Inria Paris - Team ALMAnaCH",
   bio:
-    "I build French biomedical language models (CamemBERT-bio, ModernCamemBERT-bio) and work on information extraction for clinical reports using LLMs. My current focus is evaluating LLMs in high-stakes domains: how contamination shapes benchmark scores, and how prompt language changes model decisions in clinical and strategic settings. Previously intern at Inria Sophia-Antipolis - Team STARS.",
+    "I build French biomedical language models (CamemBERT-bio, ModernCamemBERT-bio) and work on information extraction for clinical reports using LLMs. Lately I also evaluate LLMs in high-stakes domains, from clinical text to strategic simulation.",
   stats: {
     citations: 78,
     hIndex: 5,

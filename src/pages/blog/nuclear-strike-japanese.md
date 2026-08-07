@@ -68,4 +68,4 @@ Earlier work on multilingual safety shows that prompting in other languages can 
 
 All experiments were run on March 1, 2026. API-served models can be updated without notice, so absolute rates may not reproduce. Prompts were translated from English by Claude Opus 4.6, which is a confound, since the same model family produced the translations and shows the effect. Gemini Pro 3.1 was not involved in translation and shows it too.
 
-Paper: [arXiv (coming soon)](#). Code and data: [github.com/Rian-T/wargame-evals](https://github.com/Rian-T/wargame-evals).
+Paper: [TrustNLP @ ACL 2026](https://aclanthology.org/2026.trustnlp-main.35/). Code and data: [github.com/Rian-T/wargame-evals](https://github.com/Rian-T/wargame-evals).
