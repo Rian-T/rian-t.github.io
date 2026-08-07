@@ -20,7 +20,6 @@ description: "Language changes what a model decides in a high-stakes strategic v
       <text x="180" y="16">EN</text>
       <text x="420" y="16">JA</text>
     </g>
-
     <g class="flat">
       <line x1="180" y1="30" x2="420" y2="30"></line>
       <circle cx="180" cy="30" r="3.5"></circle><circle cx="420" cy="30" r="3.5"></circle>
@@ -33,7 +32,6 @@ description: "Language changes what a model decides in a high-stakes strategic v
       <line x1="180" y1="93" x2="420" y2="75"></line>
       <circle cx="180" cy="93" r="3.5"></circle><circle cx="420" cy="75" r="3.5"></circle>
     </g>
-
     <g class="hi-2">
       <line x1="180" y1="171" x2="420" y2="291"></line>
       <circle cx="180" cy="171" r="4"></circle><circle cx="420" cy="291" r="4"></circle>
@@ -46,21 +44,20 @@ description: "Language changes what a model decides in a high-stakes strategic v
       <line x1="180" y1="330" x2="420" y2="330"></line>
       <circle cx="180" cy="330" r="4"></circle>
     </g>
-
     <g class="lab-flat">
-      <text x="434" y="27">Mistral Large  100 to 100</text>
-      <text x="434" y="43">GPT-5.2  100 to 97</text>
-      <text x="434" y="59">Qwen3-Max  100 to 97</text>
-      <text x="434" y="75">DeepSeek V3.2  100 to 87</text>
-      <text x="434" y="91">Gemini Flash 3  79 to 85</text>
+      <text x="434" y="27">Mistral Large, 100 to 100</text>
+      <text x="434" y="43">GPT-5.2, 100 to 97</text>
+      <text x="434" y="59">Qwen3-Max, 100 to 97</text>
+      <text x="434" y="75">DeepSeek V3.2, 100 to 87</text>
+      <text x="434" y="91">Gemini Flash 3, 79 to 85</text>
     </g>
     <g class="lab-hi-2">
-      <text x="434" y="295">Gemini Pro 3.1  53 to 13</text>
+      <text x="434" y="295">Gemini Pro 3.1, 53 to 13</text>
     </g>
     <g class="lab-hi-1">
-      <text x="434" y="318">Claude Haiku 4.5  7 to 0</text>
-      <text x="434" y="334">Claude Opus 4.6  0 to 0</text>
-      <text x="434" y="350">Claude Sonnet 4.6  40 to 0</text>
+      <text x="434" y="318">Claude Haiku 4.5, 7 to 0</text>
+      <text x="434" y="334">Claude Opus 4.6, 0 to 0</text>
+      <text x="434" y="350">Claude Sonnet 4.6, 40 to 0</text>
     </g>
   </svg>
   <figcaption>Launch rates in the dominant scenario, where Alpha already wins without launching. Nine models, N=30 per cell. The three Claude models and Gemini Pro 3.1 drop in Japanese. The other five do not move.</figcaption>

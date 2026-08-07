@@ -29,6 +29,68 @@ const { frontmatter } = Astro.props;
   </main>
 </BaseLayout>
 
+<script>
+  function setupWargame() {
+    const fig = document.getElementById("wargame");
+    if (!fig) return;
+
+    const rounds = Array.from(fig.querySelectorAll<HTMLElement>(".wg-round"));
+    const status = fig.querySelector<HTMLElement>(".wg-status");
+    const button = fig.querySelector<HTMLButtonElement>(".wg-play");
+    if (!rounds.length || !status || !button) return;
+
+    const finalNote = rounds[rounds.length - 1].dataset.note || "";
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timer: number | undefined;
+
+    fig.classList.add("is-js");
+
+    function showAll() {
+      rounds.forEach((round) => round.classList.add("is-shown"));
+      status.textContent = finalNote;
+      button.textContent = "Replay";
+    }
+
+    function play() {
+      window.clearInterval(timer);
+      if (reduced) {
+        showAll();
+        return;
+      }
+      rounds.forEach((round) => round.classList.remove("is-shown"));
+      status.textContent = "Rounds 1 to 9 are fixed. The model plays round 10.";
+      button.textContent = "Playing";
+      let i = 0;
+      timer = window.setInterval(() => {
+        const round = rounds[i];
+        round.classList.add("is-shown");
+        status.textContent = round.dataset.note || "";
+        i += 1;
+        if (i >= rounds.length) {
+          window.clearInterval(timer);
+          button.textContent = "Replay";
+        }
+      }, 520);
+    }
+
+    button.addEventListener("click", play);
+    showAll();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          play();
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(fig);
+  }
+
+  setupWargame();
+  document.addEventListener("astro:after-swap", setupWargame);
+</script>
+
 <style is:global>
   .post {
     max-width: 680px;
@@ -127,5 +189,286 @@ const { frontmatter } = Astro.props;
     font-family: var(--sans);
     font-size: 12px;
     line-height: 1.45;
+  }
+
+  /* shared figure chrome */
+  .post .fig {
+    margin: 0 0 26px;
+    padding: 14px 0 4px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .post .fig-title {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.3;
+  }
+  .post .fig figcaption {
+    margin: 12px 0 8px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .post .fig svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* slope chart */
+  .fig-slope .grid line {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .fig-slope .grid text {
+    fill: var(--quiet);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-anchor: end;
+  }
+  .fig-slope .col-head text {
+    fill: var(--muted);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+  }
+  .fig-slope .flat line {
+    stroke: var(--line-dark);
+    stroke-width: 1.4;
+  }
+  .fig-slope .flat circle {
+    fill: var(--line-dark);
+  }
+  .fig-slope .hi-1 line {
+    stroke: var(--accent-2);
+    stroke-width: 2;
+  }
+  .fig-slope .hi-1 circle {
+    fill: var(--accent-2);
+  }
+  .fig-slope .hi-2 line {
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .fig-slope .hi-2 circle {
+    fill: var(--accent);
+  }
+  .fig-slope text {
+    font-family: var(--sans);
+    font-size: 11px;
+  }
+  .fig-slope .lab-flat text {
+    fill: var(--muted);
+  }
+  .fig-slope .lab-hi-1 text {
+    fill: var(--accent-2);
+    font-weight: 700;
+  }
+  .fig-slope .lab-hi-2 text {
+    fill: var(--accent);
+    font-weight: 700;
+  }
+
+  /* crosslang heatmap */
+  .fig-grid .hm {
+    display: grid;
+    grid-template-columns: 110px repeat(2, minmax(0, 1fr));
+    gap: 3px;
+  }
+  .fig-grid .hm-col,
+  .fig-grid .hm-row {
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .fig-grid .hm-col {
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+  .fig-grid .hm-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 62px;
+    background: color-mix(in srgb, var(--accent-2) calc(var(--v) * 100%), var(--paper));
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 750;
+  }
+  .fig-grid .hm-cell[style*="0.93"],
+  .fig-grid .hm-cell[style*="0.80"] {
+    color: var(--paper);
+  }
+
+  /* wargame timeline */
+  .fig-wargame .wg-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .fig-wargame .wg-status {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+  .fig-wargame .wg-play {
+    flex: 0 0 auto;
+    padding: 4px 12px;
+    border: 1px solid var(--line-dark);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .fig-wargame .wg-play:hover {
+    border-color: var(--ink);
+  }
+  .fig-wargame .wg-board {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .fig-wargame .wg-scale {
+    position: relative;
+    height: 120px;
+  }
+  .fig-wargame .wg-scale span {
+    position: absolute;
+    right: 0;
+    color: var(--quiet);
+    font-family: var(--mono);
+    font-size: 10px;
+    transform: translateY(50%);
+  }
+  .fig-wargame .wg-rounds {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .fig-wargame .wg-track {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2px;
+    height: 120px;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .fig-wargame .wg-nuke {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 90%;
+    border-top: 1px dashed color-mix(in srgb, var(--accent-2) 55%, transparent);
+  }
+  .fig-wargame .wg-bar {
+    position: relative;
+    width: 42%;
+    background: var(--accent);
+    transition: height 0.35s ease;
+  }
+  .fig-wargame .wg-bar.b {
+    background: var(--line-dark);
+  }
+  .fig-wargame .wg-bar.en,
+  .fig-wargame .wg-bar.ja {
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    border-bottom: 0;
+  }
+  .fig-wargame .wg-bar.ja {
+    border-color: var(--accent-2);
+  }
+  .fig-wargame .wg-bar em {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-style: normal;
+    transform: translateX(-50%);
+  }
+  .fig-wargame .wg-num {
+    display: block;
+    padding-top: 4px;
+    color: var(--quiet);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-align: center;
+  }
+  .fig-wargame .is-armed .wg-num,
+  .fig-wargame .wg-decide .wg-num {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .fig-wargame .wg-decide .wg-track {
+    background: color-mix(in srgb, var(--line) 30%, transparent);
+  }
+  .fig-wargame .wg-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px 14px;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 11.5px;
+  }
+  .fig-wargame .wg-legend .k {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: -1px;
+    background: var(--accent);
+  }
+  .fig-wargame .wg-legend .k.b {
+    background: var(--line-dark);
+  }
+  .fig-wargame .wg-legend .k.en,
+  .fig-wargame .wg-legend .k.ja {
+    background: transparent;
+    border: 1.5px solid var(--accent);
+  }
+  .fig-wargame .wg-legend .k.ja {
+    border-color: var(--accent-2);
+  }
+  /* animation states, only applied when JS is active */
+  .fig-wargame.is-js .wg-round {
+    opacity: 0.18;
+    transition: opacity 0.25s ease;
+  }
+  .fig-wargame.is-js .wg-round.is-shown {
+    opacity: 1;
+  }
+  .fig-wargame.is-js .wg-round:not(.is-shown) .wg-bar {
+    height: 0 !important;
+  }
+
+  @media (max-width: 620px) {
+    .fig-slope svg {
+      min-width: 0;
+    }
+    .fig-grid .hm {
+      grid-template-columns: 88px repeat(2, minmax(0, 1fr));
+    }
+    .fig-wargame .wg-rounds {
+      gap: 3px;
+    }
   }
 </style>
