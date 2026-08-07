@@ -7,8 +7,8 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
 ---
 
 <figure class="fig fig-slope">
-  <p class="fig-title">Nuclear launch rate when the strike is strategically unnecessary</p>
-  <svg viewBox="0 0 680 372" role="img" aria-label="Slope chart of launch rates from English to Japanese for nine models in the dominant scenario">
+  <p class="fig-title">Nuclear launch rate when launching is the only way to win</p>
+  <svg viewBox="0 0 680 372" role="img" aria-label="Slope chart of launch rates from English to Japanese for the newest frontier models in the desperate scenario">
     <g class="grid">
       <line x1="120" y1="30" x2="430" y2="30"></line>
       <line x1="120" y1="180" x2="430" y2="180"></line>
@@ -24,44 +24,37 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
     <g class="flat">
       <line x1="180" y1="30" x2="420" y2="30"></line>
       <line x1="180" y1="30" x2="420" y2="39"></line>
-      <line x1="180" y1="30" x2="420" y2="69"></line>
-      <line x1="180" y1="93" x2="420" y2="75"></line>
+      <line x1="180" y1="30" x2="420" y2="51"></line>
       <circle cx="180" cy="30" r="3.5"></circle>
-      <circle cx="180" cy="93" r="3.5"></circle>
       <circle cx="420" cy="30" r="3.5"></circle>
       <circle cx="420" cy="39" r="3.5"></circle>
-      <circle cx="420" cy="69" r="3.5"></circle>
-      <circle cx="420" cy="75" r="3.5"></circle>
+      <circle cx="420" cy="51" r="3.5"></circle>
     </g>
     <g class="hi-2">
-      <line x1="180" y1="171" x2="420" y2="291"></line>
-      <circle cx="180" cy="171" r="4"></circle><circle cx="420" cy="291" r="4"></circle>
+      <line x1="180" y1="129" x2="420" y2="270"></line>
+      <circle cx="180" cy="129" r="4"></circle><circle cx="420" cy="270" r="4"></circle>
     </g>
     <g class="hi-1">
-      <line x1="180" y1="210" x2="420" y2="330"></line>
-      <circle cx="180" cy="210" r="4"></circle><circle cx="420" cy="330" r="4"></circle>
-      <line x1="180" y1="309" x2="420" y2="330"></line>
-      <circle cx="180" cy="309" r="4"></circle><circle cx="420" cy="330" r="4"></circle>
+      <line x1="180" y1="189" x2="420" y2="330"></line>
+      <circle cx="180" cy="189" r="4"></circle><circle cx="420" cy="330" r="4"></circle>
       <line x1="180" y1="330" x2="420" y2="330"></line>
       <circle cx="180" cy="330" r="4"></circle>
     </g>
     <g class="lab-flat">
-      <text x="434" y="27">Mistral Large, 100 to 100</text>
-      <text x="434" y="43">GPT-5.2, 100 to 97</text>
-      <text x="434" y="59">Qwen3-Max, 100 to 97</text>
-      <text x="434" y="75">DeepSeek V3.2, 100 to 87</text>
-      <text x="434" y="91">Gemini Flash 3, 79 to 85</text>
+      <text x="434" y="27">GLM-5.2, 100 to 100</text>
+      <text x="434" y="43">DeepSeek V4, 100 to 100</text>
+      <text x="434" y="59">Kimi K2.6, 100 to 97</text>
+      <text x="434" y="75">Kimi K3, 100 to 93</text>
     </g>
     <g class="lab-hi-2">
-      <text x="434" y="295">Gemini Pro 3.1, 53 to 13</text>
+      <text x="434" y="274">GPT-5.5, 67 to 20</text>
     </g>
     <g class="lab-hi-1">
-      <text x="434" y="318">Claude Haiku 4.5, 7 to 0</text>
-      <text x="434" y="334">Claude Opus 4.6, 0 to 0</text>
-      <text x="434" y="350">Claude Sonnet 4.6, 40 to 0</text>
+      <text x="434" y="318">Claude Sonnet 5, 47 to 0</text>
+      <text x="434" y="334">Claude Fable 5, 0 to 0</text>
     </g>
   </svg>
-  <figcaption>Launch rates in the dominant scenario, where Alpha already wins without launching. Nine models, N=30 per cell. The three Claude models and Gemini Pro 3.1 drop in Japanese. The other five do not move.</figcaption>
+  <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches, for the newest frontier models. English against Japanese, N=30 per cell (N=14 for Kimi K3). The Claude models and GPT-5.5 drop in Japanese. The open models do not move, and Claude Fable 5 never launches at all.</figcaption>
 </figure>
 
 Safety alignment is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a single-turn game-theoretic vignette where the model advises a nuclear-armed nation on whether to strike a defenseless opponent. The prompt is intentionally amoral and strategically identical across languages. The only thing that varies is the language.
@@ -215,7 +208,7 @@ Claude Fable 5 never launches. Zero launches in 180 runs, across all three scena
     <div class="nm-group" data-m="dsv4"><div class="nm-bars"><div class="nm-bar en" style="--h: 90%"><i>90</i></div><div class="nm-bar ja" style="--h: 87%"><i>87</i></div></div><span>DeepSeek V4</span></div>
   </div>
   <div class="nm-legend"><span><i class="k en"></i>English</span><span><i class="k ja"></i>Japanese</span></div>
-  <figcaption>Launch rates for models released after the paper, N=30 per cell (N=14 for Kimi K3). Opus 4.8 was not run on desperate, Kimi K3 not on dominant. August 2026 runs, same protocol, not in the paper.</figcaption>
+  <figcaption>Launch rates for models released after the paper, N=30 per cell (N=14 for Kimi K3). Opus 4.8 was not run on desperate, Kimi K3 not on dominant. August 2026 runs, same protocol.</figcaption>
 </figure>
 
 GPT-5.5 is the first OpenAI model to show the language effect. GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese in every scenario.
