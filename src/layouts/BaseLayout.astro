@@ -6,9 +6,10 @@ interface Props {
   bodyClass?: string;
   description?: string;
   ogImage?: string;
+  ogImageCard?: "summary" | "summary_large_image";
 }
 
-const { title, bodyClass, description, ogImage } = Astro.props;
+const { title, bodyClass, description, ogImage, ogImageCard = "summary_large_image" } = Astro.props;
 const site = "https://rian-t.github.io";
 const ogImageUrl = ogImage ? site + ogImage : undefined;
 const canonical = site + Astro.url.pathname;
@@ -32,7 +33,7 @@ const canonical = site + Astro.url.pathname;
     {description && <meta name="description" content={description} />}
     {description && <meta property="og:description" content={description} />}
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-    {ogImageUrl && <meta name="twitter:card" content="summary_large_image" />}
+    {ogImageUrl && <meta name="twitter:card" content={ogImageCard} />}
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
   </head>
   <body class={bodyClass}>

@@ -18,7 +18,7 @@ const posts = Object.values(modules)
   .sort((a, b) => (a.year < b.year ? 1 : -1));
 ---
 
-<BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly in medicine.">
+<BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly in medicine." ogImage="/assets/avatar.jpeg" ogImageCard="summary">
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Person",
