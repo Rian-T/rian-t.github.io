@@ -316,9 +316,9 @@ const displayDate = new Date(frontmatter.date)
     text-anchor: end;
   }
   .fig-slope .col-head text {
-    fill: var(--muted);
+    fill: var(--ink);
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     text-anchor: middle;
   }
@@ -630,10 +630,15 @@ const displayDate = new Date(frontmatter.date)
   body.theme-radar .fig-slope .grid line {
     stroke-dasharray: 3 4;
   }
-  body.theme-radar .fig-slope text,
-  body.theme-radar .fig-slope .col-head text {
+  body.theme-radar .fig-slope text {
     font-family: var(--mono);
     font-size: 12px;
+  }
+  body.theme-radar .fig-slope .col-head text {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    fill: var(--ink);
   }
   body.theme-radar .fig-slope .hi-2 line {
     stroke-dasharray: 6 3;
@@ -766,6 +771,11 @@ const displayDate = new Date(frontmatter.date)
   .fig-table tr.mt-group > th,
   .fig-table tr.mt-group > td {
     border-top: 8px solid transparent;
+    background-clip: padding-box;
+  }
+  .fig-table tr.mt-fam > th,
+  .fig-table tr.mt-fam > td {
+    border-top: 4px solid transparent;
     background-clip: padding-box;
   }
   body.theme-radar .fig-table .mt-cell.hi {

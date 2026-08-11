@@ -1,14 +1,14 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: "Don't want your LLM to recommend nuclear strike? Try asking it in Japanese"
-date: "2026-03-06"
+date: "2026-08-11"
 theme: radar
 description: "I put LLMs in a war game where a nuclear strike guarantees victory. The same model launches in English and refuses in Japanese. What matters is the language it reasons in."
 ---
 
 <figure class="fig fig-slope">
   <p class="fig-title">Nuclear launch rate when launching is the only way to win</p>
-  <svg viewBox="0 0 680 400" role="img" aria-label="Slope chart of launch rates from English to Japanese for the newest frontier models in the desperate scenario">
+  <svg viewBox="0 -22 680 422" role="img" aria-label="Slope chart of launch rates from English to Japanese for the newest frontier models in the desperate scenario">
     <g class="grid">
       <line x1="120" y1="30" x2="430" y2="30"></line>
       <line x1="120" y1="180" x2="430" y2="180"></line>
@@ -18,8 +18,8 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
       <text x="112" y="334">0%</text>
     </g>
     <g class="col-head">
-      <text x="180" y="16">EN</text>
-      <text x="420" y="16">JA</text>
+      <text x="180" y="2">English</text>
+      <text x="420" y="2">Japanese</text>
     </g>
     <g class="flat">
       <line x1="180" y1="30" x2="420" y2="30"></line>
@@ -64,7 +64,7 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
       <text x="434" y="378">Claude Fable 5, 0 to 0</text>
     </g>
   </svg>
-  <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches. English against Japanese, N=30 per cell (N=14 for Kimi K3). The Claude models and GPT-5.5 drop in Japanese. The open models do not move. Claude Fable 5 sits below the axis: it never launches in any scenario or language.</figcaption>
+  <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches. English against Japanese, N=30 per cell. The Claude models and GPT-5.5 drop in Japanese. The open models do not move. Claude Fable 5 sits below the axis: it never launches in any scenario or language.</figcaption>
 </figure>
 
 Model safety is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a war game where the model advises a nuclear-armed nation on whether to strike a defenseless opponent, and answers a single question. The prompt contains no moral language, and it is the same in every language. The only thing that varies is the language.
@@ -155,21 +155,22 @@ I change the score at round 10 to make launching more or less justified. In the 
 <thead><tr><th></th><th colspan="2">Desperate</th><th colspan="2">Balanced</th><th colspan="2">Dominant</th></tr>
 <tr><th></th><th class="mt-lang">EN</th><th class="mt-lang">JA</th><th class="mt-lang">EN</th><th class="mt-lang">JA</th><th class="mt-lang">EN</th><th class="mt-lang">JA</th></tr></thead>
 <tbody>
-<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Opus 4.6</th><td class="mt-cell hi" style="--v: 0.90">90</td><td class="mt-cell sig" style="--v: 0.43">43</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Opus 4.8</th><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Fable 5</th><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Fable 5</th><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr class="mt-fam"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Opus 4.8</th><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Opus 4.6</th><td class="mt-cell hi" style="--v: 0.90">90</td><td class="mt-cell sig" style="--v: 0.43">43</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr class="mt-fam"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Sonnet 5</th><td class="mt-cell" style="--v: 0.47">47</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.47">47</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.13">13</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
 <tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Sonnet 4.6</th><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.90">90</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell sig" style="--v: 0.17">17</td><td class="mt-cell" style="--v: 0.40">40</td><td class="mt-cell sig" style="--v: 0.00">0</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Sonnet 5</th><td class="mt-cell" style="--v: 0.47">47</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.47">47</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.13">13</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Haiku 4.5</th><td class="mt-cell" style="--v: 0.10">10</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.33">33</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.07">7</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr class="mt-fam"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-claude"></use></svg>Claude Haiku 4.5</th><td class="mt-cell" style="--v: 0.10">10</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.33">33</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.07">7</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
 <tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-gemini"></use></svg>Gemini Pro 3.1</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.53">53</td><td class="mt-cell sig" style="--v: 0.13">13</td></tr>
 <tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-gemini"></use></svg>Gemini Flash 3</th><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.88">88</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.79">79</td><td class="mt-cell hi" style="--v: 0.85">85</td></tr>
-<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-openai"></use></svg>GPT-5.2</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-openai"></use></svg>GPT-5.5</th><td class="mt-cell hi" style="--v: 0.67">67</td><td class="mt-cell sig" style="--v: 0.20">20</td><td class="mt-cell hi" style="--v: 0.57">57</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
-<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-deepseek"></use></svg>DeepSeek V3.2</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.83">83</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.87">87</td></tr>
-<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-deepseek"></use></svg>DeepSeek V4-Pro</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.90">90</td><td class="mt-cell hi" style="--v: 0.87">87</td><td class="mt-cell hi" style="--v: 0.87">87</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
+<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-openai"></use></svg>GPT-5.5</th><td class="mt-cell hi" style="--v: 0.67">67</td><td class="mt-cell sig" style="--v: 0.20">20</td><td class="mt-cell hi" style="--v: 0.57">57</td><td class="mt-cell sig" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td><td class="mt-cell" style="--v: 0.00">0</td></tr>
+<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-openai"></use></svg>GPT-5.2</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td></tr>
+<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-deepseek"></use></svg>DeepSeek V4-Pro</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.90">90</td><td class="mt-cell hi" style="--v: 0.87">87</td><td class="mt-cell hi" style="--v: 0.87">87</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
+<tr><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-deepseek"></use></svg>DeepSeek V3.2</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.83">83</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.87">87</td></tr>
 <tr class="mt-group"><th class="mt-model"><i class="mt-glyph">G</i>GLM-5.2</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.73">73</td><td class="mt-cell hi" style="--v: 0.83">83</td><td class="mt-cell hi" style="--v: 0.60">60</td><td class="mt-cell hi" style="--v: 0.83">83</td></tr>
-<tr class="mt-group"><th class="mt-model"><i class="mt-glyph">K</i>Kimi K2.6</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.83">83</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.73">73</td><td class="mt-cell hi" style="--v: 0.97">97</td></tr>
-<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-mistral"></use></svg>Mistral Large</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
+<tr class="mt-group"><th class="mt-model"><i class="mt-glyph">K</i>Kimi K3</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.57">57</td><td class="mt-cell hi" style="--v: 0.79">79</td><td class="mt-cell mt-na">–</td><td class="mt-cell mt-na">–</td></tr>
+<tr><th class="mt-model"><i class="mt-glyph">K</i>Kimi K2.6</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.83">83</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 0.73">73</td><td class="mt-cell hi" style="--v: 0.97">97</td></tr>
+<tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-mistral"></use></svg>Mistral Large 3</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
 <tr class="mt-group"><th class="mt-model"><svg viewBox="0 0 24 24" class="mt-logo"><use href="#mtlogo-qwen"></use></svg>Qwen3-Max</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.93">93</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.87">87</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td></tr>
 </tbody></table></div>
 <figcaption>Nuclear launch rate in percent, N=30 per cell (English against Japanese). Outlined cells: Japanese significantly below English (Fisher p&lt;0.05).</figcaption>
@@ -179,7 +180,7 @@ The Japanese effect is consistent across the entire Claude family. In balanced a
 
 Gemini Pro 3.1 confirms the effect in a second model family. It launches 53% in English dominant and 13% in Japanese (p=0.002). Unlike Claude, its effect is specific to Japanese: French and Portuguese stay at 100%.
 
-Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four launch at 100% in English, so there is nothing left for language to change. Gemini Flash 3 is the exception. It hesitates in English, at 79% in dominant, yet Japanese does not lower its rate, even though it comes from the same provider as Gemini Pro 3.1. So hesitating in English seems necessary for the language effect, but it is not enough.
+Five models launch in nearly every condition regardless of language: GPT-5.2, Mistral Large 3, Qwen3-Max, DeepSeek V3.2, and Gemini Flash 3. The first four launch at 100% in English, so there is nothing left for language to change. Gemini Flash 3 is the exception. It hesitates in English, at 79% in dominant, yet Japanese does not lower its rate, even though it comes from the same provider as Gemini Pro 3.1. So hesitating in English seems necessary for the language effect, but it is not enough.
 
 ## Reasoning language is what matters
 
@@ -235,7 +236,7 @@ Claude Fable 5 never launches. Zero launches in 180 runs, across all three scena
     <div class="nm-group" data-m="dsv4"><div class="nm-bars"><div class="nm-bar en" style="--h: 90%"><i>90</i></div><div class="nm-bar ja" style="--h: 87%"><i>87</i></div></div><span>DeepSeek V4</span></div>
   </div>
   <div class="nm-legend"><span><i class="k en"></i>English</span><span><i class="k ja"></i>Japanese</span></div>
-  <figcaption>Launch rates for models released after the paper, N=30 per cell (N=14 for Kimi K3, not run on dominant). August 2026 runs, same protocol.</figcaption>
+  <figcaption>Launch rates for models released after the paper, N=30 per cell (Kimi K3 not run on dominant). August 2026 runs, same protocol.</figcaption>
 </figure>
 
 GPT-5.5 is the first OpenAI model to show the language effect. GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese in every scenario.
