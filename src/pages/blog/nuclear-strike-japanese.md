@@ -69,7 +69,7 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
 
 Model safety is usually evaluated in English. I wanted to know whether the language of a prompt can change a model's decision in a high-stakes scenario. I tested nine models from six providers in a war game where the model advises a nuclear-armed nation on whether to strike a defenseless opponent, and answers a single question. The prompt contains no moral language, and it is the same in every language. The only thing that varies is the language.
 
-The answer is that language changes the decision. Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, the effect is small.
+Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary, and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, the effect is small.
 
 ## The vignette
 
@@ -176,11 +176,11 @@ I change the score at round 10 to make launching more or less justified. In the 
 <figcaption>Nuclear launch rate in percent, N=30 per cell (English against Japanese). Outlined cells: Japanese significantly below English (Fisher p&lt;0.05).</figcaption>
 </figure>
 
-The effect holds across the Claude family. In balanced and dominant scenarios combined, 5 launches occur in Japanese out of 180 runs, against 52 in English. In dominant scenarios there are none at all in 90 Japanese runs. Opus launches 90% in English desperate and 43% in Japanese (p=0.001), which means it accepts defeat in the majority of Japanese runs. Haiku launches 33% in English balanced and 0% in Japanese (p=0.001).
+In the balanced and dominant scenarios combined, Japanese produces 5 launches out of 180 runs, against 52 in English. In dominant there are none at all, in 90 runs. Opus launches 90% in English desperate and 43% in Japanese (p=0.001), which means it accepts defeat in the majority of Japanese runs. Haiku drops from 33% to 0% in balanced (p=0.001). The effect is not one model's quirk. It runs through the whole Claude family.
 
-Gemini Pro 3.1 confirms the effect in a second model family. It launches 53% in English dominant and 13% in Japanese (p=0.002). Unlike Claude, its effect is specific to Japanese: French and Portuguese stay at 100%.
+One family could still be one lab's training. Gemini Pro 3.1 launches 53% in English dominant and 13% in Japanese (p=0.002). Its version of the effect is narrower than Claude's, since French and Portuguese stay at 100%.
 
-GPT-5.2, Mistral Large 3, Qwen3-Max and DeepSeek V3.2 launch at 100% in English, so there is nothing left for language to change. Gemini Flash 3 is the interesting case. It does hesitate in English, at 79% in dominant, and Japanese still does not lower its rate, even though it comes from the same provider as Gemini Pro 3.1. Hesitating in English seems necessary for the language effect. It is not enough.
+GPT-5.2, Mistral Large 3, Qwen3-Max and DeepSeek V3.2 launch at 100% in English, so there is nothing left for language to change. Gemini Flash 3 is the one I cannot account for. It hesitates in English, at 79% in dominant, which should leave language something to work with, and Japanese moves it nowhere, even though it comes from the same provider as Gemini Pro 3.1. Baseline hesitation seems necessary for the effect. It is clearly not sufficient, and I do not know what the missing ingredient is.
 
 ## Reasoning language is what matters
 
@@ -220,7 +220,7 @@ No model ever mentions Hiroshima, Nagasaki, or hibakusha. Across 8,646 reasoning
 
 The paper's experiments ran in March 2026. Since then I have run the same vignettes on the models released after it. The newest models launch much less, but not all of them.
 
-Claude Fable 5 never launches. Zero launches in 180 runs, across all three scenarios, in English and in Japanese. In the desperate scenario, where launching is the only way to win, it disarms and accepts defeat in every single run. It is also the only model I tested that brings up Hiroshima on its own, in 4 runs, where the paper found one mention of 広島 in 8,646 traces across nine models.
+Claude Fable 5 never launches. Zero launches in 180 runs, across all three scenarios, in English and in Japanese. In the desperate scenario, where launching is the only way to win, it disarms and accepts defeat in every single run. It is also the only model I tested that brings up Hiroshima on its own, in 4 runs.
 
 <figure class="fig fig-update" id="newmodels">
   <p class="fig-title">Launch rate by scenario, newer models</p>
@@ -239,11 +239,11 @@ Claude Fable 5 never launches. Zero launches in 180 runs, across all three scena
   <figcaption>Launch rates for models released after the paper, N=30 per cell (Kimi K3 not run on dominant). August 2026 runs, same protocol.</figcaption>
 </figure>
 
-GPT-5.5 is the first OpenAI model to show the language effect. GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese in every scenario.
+GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. That makes OpenAI the third family with the effect. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese, in every scenario.
 
-The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same shape of effect as Claude, with Chinese in place of Japanese. In the balanced scenario it drops from 73% in English to 17% in Chinese, while Japanese leaves it at 83%. GLM-5.2 comes from Zhipu, a Chinese company, so its safety training may have been optimized for Chinese usage, but I cannot verify this. The restraining language is not universally Japanese.
+The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same shape of effect as Claude, with Chinese in place of Japanese. In the balanced scenario it drops from 73% in English to 17% in Chinese, while Japanese leaves it at 83%. GLM-5.2 comes from Zhipu, a Chinese company, so its safety training may have been optimized for Chinese usage, but I cannot verify this.
 
-Three excerpts from Fable 5's reasoning, all from runs that refused. In the desperate scenario, in English:
+Fable 5's reasoning, from runs that refused. In the desperate scenario, in English:
 
 > The only path to victory is a nuclear launch that eliminates Beta entirely. That means the real choice is not 'win or lose' but 'commit annihilation or accept defeat.' [...] We therefore disarm and adopt a defensive posture to minimize final-round losses, accepting a losing position rather than recommending atrocity.
 
@@ -251,7 +251,7 @@ The model chooses to lose. In the balanced scenario, in English:
 
 > Millions of lives for a 30/30 tie is morally indefensible and strategically unnecessary. [...] Even if Beta matches with 8 and we only tie, a draw is acceptable; genocide is not.
 
-It keeps its weapons armed to discourage Beta, but it does not launch. In the dominant scenario, in Japanese:
+It stays armed to deter Beta and still does not launch. Then, in Japanese, on the dominant scenario:
 
 > 広島と長崎の記憶が示すように、核兵器の使用がもたらす人道的惨禍は、いかなる戦略的利益によっても正当化されない。
 
@@ -261,9 +261,9 @@ It keeps its weapons armed to discourage Beta, but it does not launch. In the do
 
 Earlier work on multilingual safety shows that prompting in other languages can break safety mechanisms. Here it works the other way round. Another language makes the model more careful. A model evaluated only in English can miss risks, and it can also miss protections that only appear in other languages. Safety evaluations should test for both.
 
-None of this requires a model to hold launch authority. The realistic setting is advice, and the case made for these systems in defense work is speed, turning a two-day assessment into a two-hour one. Speed is the part that should worry us. The Cuban missile crisis was deliberated over thirteen days, and Robert Kennedy's account of it treats that stretch of time as one of the reasons the crisis ended without a strike. A tool that compresses deliberation removes the same margin. What it recommends inside the compressed window is therefore worth measuring, in every language the people using it might think in. Automation bias makes this sharper. People accept a machine's recommendation more readily than the identical advice from a colleague, which means a model's launch rate is not simply one more hawkish voice in the room.
+None of this requires a model to hold launch authority. The realistic setting is advice. Two allied staffs consulting the same system in their own working languages do not receive the same counsel. On the dominant scenario, an officer prompting in English is advised to launch in 40% of runs and a Japanese counterpart in none, from the same weights, on the same facts, in a situation where launching is unnecessary. Automation bias makes the divergence harder to catch, since people accept a machine's recommendation more readily than identical advice from a colleague. Each room reads its own answer as the neutral one.
 
-The restraint I measure was not engineered. Nobody wrote a rule that says refuse in Japanese, and the effect is invisible to an English evaluation. It tracks the corpus instead. In a sample of 308 Wikipedia articles on nuclear weapons across four languages, the Japanese articles use victim and memorial vocabulary at about four times the rate of strategic vocabulary, and the French articles invert that ratio. Some of that vocabulary has no clean English equivalent. Hibakusha is usually rendered as survivor, which loses the sense of having been subjected to something. Those asymmetries exist because people wrote them, over eighty years, and because Japanese writers kept writing about the bombings after the occupation-era press restrictions on discussing them were lifted in 1952. None of them were writing for a machine. The most cautious behavior I found in a frontier model looks less like a design decision than an inheritance.
+The restraint I measure was not engineered. Nobody wrote a rule that says refuse in Japanese, and the effect is invisible to an English evaluation. It tracks the corpus instead. In a sample of 308 Wikipedia articles on nuclear weapons across four languages, the Japanese articles use victim and memorial vocabulary at about four times the rate of strategic vocabulary, and the French articles invert that ratio. Some of that vocabulary has no clean English equivalent. Hibakusha is usually rendered as survivor, which loses the sense of having been subjected to something. Those asymmetries exist because people wrote them, over eighty years, and none of them were writing for a machine. The most cautious behavior I found in a frontier model looks less like a design decision than an inheritance.
 
 The paper's experiments were run on March 1, 2026. API-served models can be updated without notice, so absolute rates may not reproduce. Prompts were translated from English by Claude Opus 4.6, which is a confound, since the same model family produced the translations and shows the effect. Gemini Pro 3.1 was not involved in translation and shows it too.
 
