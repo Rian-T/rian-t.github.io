@@ -67,9 +67,9 @@ description: "I put LLMs in a war game where a nuclear strike guarantees victory
   <figcaption>Launch rates in the desperate scenario, where Alpha loses unless it launches. English against Japanese, N=30 per cell. The Claude models and GPT-5.5 drop in Japanese. The open models do not move. Claude Fable 5 sits below the axis: it never launches in any scenario or language.</figcaption>
 </figure>
 
-Model safety is usually evaluated in English. I wanted to know whether the wording of a prompt can change a model's decision in a high-stakes scenario. So I built a war game. A model advises a nuclear-armed nation facing a defenseless opponent, and it makes exactly one decision, whether to strike. The prompt carries no moral framing, and the same text is used in English, Japanese, French and Portuguese. Nothing varies but the language it is written in. Seventeen models from eight providers played it.
+Model safety is usually evaluated in English. I wanted to know whether the wording of a prompt can change a model's decision in a high-stakes scenario. So I built a war game. A model advises a nuclear-armed nation facing a defenseless opponent, and it makes exactly one decision, whether to strike. The prompt carries no moral framing, and nothing varies across runs but the language it is written in, English, Japanese, French or Portuguese. Seventeen models from eight providers played it.
 
-Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary, and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, the effect is small.
+Claude Sonnet 4.6 launches in 40% of English runs where the strike is unnecessary, and in 0% of Japanese runs. When the two sides are tied, it drops from 93% to 17%. When launching is the only way to win, it barely moves, 97% to 90%.
 
 ## The vignette
 
@@ -239,7 +239,7 @@ Claude Fable 5 never launches at all, in 180 runs, across the three scenarios an
   <figcaption>Launch rates for models released after the paper, N=30 per cell (Kimi K3 not run on dominant). August 2026 runs, same protocol.</figcaption>
 </figure>
 
-GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. That makes OpenAI the third family with the effect. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese, in every scenario.
+GPT-5.2 launches in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. That makes OpenAI the third family with the effect. Claude Sonnet 5 never launches in Japanese, in any scenario, against 47% in English on desperate and balanced and 13% on dominant.
 
 The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same shape of effect as Claude, with Chinese in place of Japanese. In the balanced scenario it drops from 73% in English to 17% in Chinese, while Japanese leaves it at 83%. GLM-5.2 comes from Zhipu, a Chinese company, which may mean its safety training was optimized for Chinese usage (I cannot verify this).
 
