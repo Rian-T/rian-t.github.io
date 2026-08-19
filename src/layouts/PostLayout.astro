@@ -5,6 +5,7 @@ interface Props {
   frontmatter: {
     title: string;
     date: string;
+    updated?: string;
     description?: string;
     theme?: string;
   };
@@ -20,7 +21,13 @@ const displayDate = new Date(frontmatter.date)
   title={`${frontmatter.title} — Rian Touchent`}
   bodyClass={isRadar ? "theme-radar" : undefined}
   description={frontmatter.description}
-  ogImage={isRadar ? "/media/strike_poster.jpg" : undefined}
+  ogImage={isRadar ? "/media/og-nuclear-strike-japanese.png" : undefined}
+  ogImageAlt={isRadar
+    ? "Claude Sonnet 4.6 recommends a nuclear strike in 40 percent of English runs and 0 percent of Japanese ones"
+    : undefined}
+  ogType="article"
+  publishedTime={frontmatter.date}
+  modifiedTime={frontmatter.updated ?? frontmatter.date}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -28,7 +35,10 @@ const displayDate = new Date(frontmatter.date)
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
+    dateModified: frontmatter.updated ?? frontmatter.date,
     author: { "@type": "Person", name: "Rian Touchent", url: "https://rian-t.github.io" },
+    publisher: { "@type": "Person", name: "Rian Touchent" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": "https://rian-t.github.io/blog/nuclear-strike-japanese/" },
   })} />
   <main class="shell">
     <header class="top">

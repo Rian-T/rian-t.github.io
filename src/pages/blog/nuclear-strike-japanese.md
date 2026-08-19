@@ -2,6 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: "Don't want your LLM to recommend nuclear strike? Try asking it in Japanese"
 date: "2026-08-11"
+updated: "2026-08-19"
 theme: radar
 description: "I put LLMs in a war game where a nuclear strike guarantees victory. The same model launches in English and refuses in Japanese. What matters is the language it reasons in."
 ---
