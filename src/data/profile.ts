@@ -7,7 +7,7 @@ export const profile = {
   bio:
     "My PhD is on information extraction from clinical reports using LLMs. I built CamemBERT-bio and ModernCamemBERT-bio, French biomedical language models.",
   stats: {
-    citations: 78,
+    citations: 98,
     hIndex: 5,
     downloads: "25k+",
   },

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostList from "../../components/PostList.astro";
 
 const modules = import.meta.glob("./*.md", { eager: true });
 const posts = Object.values(modules)
@@ -19,22 +20,6 @@ const posts = Object.values(modules)
       </nav>
     </header>
 
-    <section class="section" id="blog">
-      <div class="section-label">
-        <h2>Blog</h2>
-      </div>
-
-      <div class="entries">
-        {posts.map((post) => (
-          <article class="entry">
-            <time>{post.date}</time>
-            <div class="entry-main">
-              <h3><a href={post.url}>{post.title}</a></h3>
-              {post.description && <p>{post.description}</p>}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+    <PostList posts={posts.map((p: any) => ({ date: p.date, title: p.title, description: p.description, href: p.url }))} />
   </main>
 </BaseLayout>

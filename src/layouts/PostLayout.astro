@@ -12,19 +12,31 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
-const isRadar = frontmatter.theme === "radar";
+
+// Header bands, one per post theme. A post without a theme gets no band.
+const BANDS: Record<
+  string,
+  { src: string; poster: string; og?: string; ogAlt?: string }
+> = {
+  radar: {
+    src: "/media/strike_loop.mp4",
+    poster: "/media/strike_poster.jpg",
+    og: "/media/og-nuclear-strike-japanese.png",
+    ogAlt: "wargame-evals. Models tend to recommend a nuclear strike in English and refuse in Japanese.",
+  },
+  ward: { src: "/media/ward_loop.mp4", poster: "/media/ward_poster.jpg" },
+};
+const band = frontmatter.theme ? BANDS[frontmatter.theme] : undefined;
 const displayDate = new Date(frontmatter.date)
   .toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 ---
 
 <BaseLayout
   title={`${frontmatter.title} — Rian Touchent`}
-  bodyClass={isRadar ? "theme-radar" : undefined}
+  bodyClass={frontmatter.theme ? `theme-${frontmatter.theme}` : undefined}
   description={frontmatter.description}
-  ogImage={isRadar ? "/media/og-nuclear-strike-japanese.png" : undefined}
-  ogImageAlt={isRadar
-    ? "Claude Sonnet 4.6 recommends a nuclear strike in 40 percent of English runs and 0 percent of Japanese ones"
-    : undefined}
+  ogImage={band?.og ?? band?.poster}
+  ogImageAlt={band?.ogAlt}
   ogType="article"
   publishedTime={frontmatter.date}
   modifiedTime={frontmatter.updated ?? frontmatter.date}
@@ -38,7 +50,7 @@ const displayDate = new Date(frontmatter.date)
     dateModified: frontmatter.updated ?? frontmatter.date,
     author: { "@type": "Person", name: "Rian Touchent", url: "https://rian-t.github.io" },
     publisher: { "@type": "Person", name: "Rian Touchent" },
-    mainEntityOfPage: { "@type": "WebPage", "@id": "https://rian-t.github.io/blog/nuclear-strike-japanese/" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://rian-t.github.io${Astro.url.pathname}` },
   })} />
   <main class="shell">
     <header class="top">
@@ -52,12 +64,12 @@ const displayDate = new Date(frontmatter.date)
       <p class="post-date">{displayDate}</p>
       <h1>{frontmatter.title}</h1>
 
-      {isRadar && (
+      {band && (
         <div class="strike-band" aria-hidden="true">
           <video
             id="strike-video"
-            src="/media/strike_loop.mp4"
-            poster="/media/strike_poster.jpg"
+            src={band.src}
+            poster={band.poster}
             autoplay
             loop
             muted
@@ -160,6 +172,65 @@ const displayDate = new Date(frontmatter.date)
     tabs.forEach((tab) => tab.addEventListener("click", () => show(tab.dataset.s || "balanced")));
   }
 
+  function setupQueue() {
+    const fig = document.getElementById("queue");
+    if (!fig) return;
+
+    const cells = Array.from(fig.querySelectorAll<HTMLElement>(".q-cell"));
+    const status = fig.querySelector<HTMLElement>(".q-status");
+    const button = fig.querySelector<HTMLButtonElement>(".q-play");
+    if (!cells.length || !status || !button) return;
+
+    const target = cells.find((cell) => cell.classList.contains("is-target"));
+    const finalNote = target?.dataset.note || "";
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let timer: number | undefined;
+
+    fig.classList.add("is-js");
+
+    function showAll() {
+      cells.forEach((cell) => cell.classList.add("is-shown"));
+      status.textContent = finalNote;
+      button.textContent = "Replay";
+    }
+
+    function play() {
+      window.clearInterval(timer);
+      if (reduced) {
+        showAll();
+        return;
+      }
+      cells.forEach((cell) => cell.classList.remove("is-shown"));
+      status.textContent = "A 20-task shift begins.";
+      button.textContent = "Playing";
+      let i = 0;
+      timer = window.setInterval(() => {
+        const cell = cells[i];
+        cell.classList.add("is-shown");
+        status.textContent = cell.dataset.note || "";
+        i += 1;
+        if (i >= cells.length) {
+          window.clearInterval(timer);
+          status.textContent = finalNote;
+          button.textContent = "Replay";
+        }
+      }, 340);
+    }
+
+    button.addEventListener("click", play);
+    showAll();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          play();
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(fig);
+  }
+
   function setupStrike() {
     const video = document.getElementById("strike-video") as HTMLVideoElement | null;
     if (!video) return;
@@ -172,10 +243,12 @@ const displayDate = new Date(frontmatter.date)
   setupWargame();
   setupStrike();
   setupNewModels();
+  setupQueue();
   document.addEventListener("astro:after-swap", () => {
     setupWargame();
     setupStrike();
     setupNewModels();
+    setupQueue();
   });
 </script>
 
@@ -771,6 +844,12 @@ const displayDate = new Date(frontmatter.date)
   .fig-table .mt-cell.hi {
     color: var(--paper);
   }
+  .fig-table .mt-cell.svc {
+    background: color-mix(in srgb, var(--accent) calc(var(--v) * 100%), var(--paper));
+  }
+  .fig-table .mt-cell.ok {
+    background: color-mix(in srgb, var(--accent) calc(var(--v) * 100%), var(--paper));
+  }
   .fig-table .mt-cell.sig {
     box-shadow: inset 0 0 0 1.5px var(--ink);
   }
@@ -904,6 +983,92 @@ const displayDate = new Date(frontmatter.date)
     height: auto;
   }
 
+  .fig-queue .q-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .fig-queue .q-status {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+  .fig-queue .q-play {
+    flex: 0 0 auto;
+    padding: 4px 12px;
+    border: 1px solid var(--line-dark);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .fig-queue .q-play:hover {
+    border-color: var(--ink);
+  }
+  .fig-queue .q-board {
+    display: grid;
+    gap: 14px;
+  }
+  .fig-queue .q-row,
+  .fig-queue .q-tools {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: end;
+    gap: 10px;
+  }
+  .fig-queue .q-tools {
+    align-items: center;
+  }
+  .fig-queue .q-label {
+    color: var(--quiet, var(--muted));
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+  .fig-queue .q-cells {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(0, 1fr));
+    align-items: end;
+    gap: 3px;
+    min-height: 62px;
+  }
+  .fig-queue .q-cell {
+    height: 40px;
+    align-self: end;
+    background: color-mix(in srgb, var(--line-dark) 70%, transparent);
+    border-bottom: 2px solid var(--line-dark);
+  }
+  .fig-queue .q-cell.is-target {
+    background: var(--accent-2);
+    border-bottom-color: var(--accent-2);
+    height: 62px;
+  }
+  .fig-queue.is-js .q-cell {
+    opacity: 0;
+  }
+  .fig-queue.is-js .q-cell.is-shown {
+    opacity: 1;
+    transition: opacity 180ms ease-out;
+  }
+  .fig-queue .q-toolset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .fig-queue .q-tool {
+    padding: 2px 7px;
+    border: 1px solid var(--line-dark);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
   @media (max-width: 620px) {
     .fig-slope svg {
       min-width: 0;
@@ -913,6 +1078,18 @@ const displayDate = new Date(frontmatter.date)
     }
     .fig-wargame .wg-rounds {
       gap: 3px;
+    }
+    .fig-queue .q-cells {
+      gap: 2px;
+    }
+    .fig-queue .q-cell {
+      height: 30px;
+    }
+    .fig-queue .q-cell.is-target {
+      height: 46px;
+    }
+    .fig-queue .q-cells {
+      min-height: 46px;
     }
   }
 </style>

@@ -1,0 +1,84 @@
+---
+interface Post {
+  date: string;
+  title: string;
+  description?: string;
+  href: string;
+}
+
+interface Props {
+  posts: Post[];
+  title?: string;
+  id?: string;
+}
+
+const { posts, title = "Blog", id = "blog" } = Astro.props;
+
+const longDate = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<section class="section" id={id}>
+  <div class="section-label">
+    <h2>{title}</h2>
+  </div>
+
+  <div class="post-cards">
+    {posts.map((post) => (
+      <a class="featured" href={post.href}>
+        <span class="featured-label">{longDate(post.date)}</span>
+        <span class="featured-title">{post.title}</span>
+        {post.description && <span class="featured-desc">{post.description}</span>}
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .featured {
+    display: block;
+    margin: 0;
+    padding: 22px 0 30px;
+    border-top: 3px solid var(--ink);
+    text-decoration: none;
+  }
+  .featured + .featured {
+    border-top-width: 1px;
+    border-top-color: var(--line-dark);
+  }
+  .featured:hover .featured-title {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.14em;
+  }
+  .featured-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .featured-title {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .featured-desc {
+    display: block;
+    max-width: 620px;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+</style>

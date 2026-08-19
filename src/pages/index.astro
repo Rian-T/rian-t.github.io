@@ -4,18 +4,18 @@ import Header from "../components/Header.astro";
 import ProfileIntro from "../components/ProfileIntro.astro";
 import ReleaseGroups from "../components/ReleaseGroups.astro";
 import SectionList from "../components/SectionList.astro";
+import PostList from "../components/PostList.astro";
 import { articles } from "../data/articles";
 
 const modules = import.meta.glob("./blog/*.md", { eager: true });
 const posts = Object.values(modules)
   .map((mod: any) => ({
-    year: mod.frontmatter.date.slice(0, 4),
+    date: mod.frontmatter.date,
     title: mod.frontmatter.title,
     description: mod.frontmatter.description,
     href: mod.url,
-    links: [{ label: "Read", href: mod.url }],
   }))
-  .sort((a, b) => (a.year < b.year ? 1 : -1));
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
 ---
 
 <BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly clinical." ogImage="/assets/avatar.jpeg" ogImageCard="summary">
@@ -35,60 +35,11 @@ const posts = Object.values(modules)
     <Header />
     <ProfileIntro />
 
-    {posts[0] && (
-      <a class="featured" href={posts[0].href}>
-        <span class="featured-label">Latest post</span>
-        <span class="featured-title">{posts[0].title}</span>
-        <span class="featured-desc">{posts[0].description}</span>
-      </a>
-    )}
-
     <div class="content-stack">
+      <PostList posts={posts} />
       <SectionList id="articles" title="Articles" entries={articles} />
-      <SectionList id="blog" title="Blog" entries={posts} />
       <ReleaseGroups />
     </div>
   </main>
 </BaseLayout>
 
-<style>
-  .featured {
-    display: block;
-    margin: 6px 0 4px;
-    padding: 20px 0 24px;
-    border-top: 3px solid var(--ink);
-    border-bottom: 1px solid var(--line-dark);
-    text-decoration: none;
-  }
-  .featured:hover .featured-title {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.14em;
-  }
-  .featured-label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-  .featured-title {
-    display: block;
-    font-family: var(--serif);
-    font-size: clamp(22px, 2.6vw, 28px);
-    font-weight: 700;
-    line-height: 1.18;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .featured-desc {
-    display: block;
-    max-width: 620px;
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--muted);
-  }
-</style>
