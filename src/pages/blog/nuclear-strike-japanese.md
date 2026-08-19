@@ -268,7 +268,7 @@ GPT-5.6 shipped in three variants. I ran all three on the three scenarios, in En
 
 They do not read as one model. On dominant in English, sol launches in 3% of runs and terra in 100%. Same release, same lab. If that holds, testing "GPT-5.6" does not say much about GPT-5.6.
 
-Terra and luna sit at the ceiling almost everywhere, which seems to leave language nothing to move. Sol is the one that discriminates, and it is also where Chinese does something: 90% in English, 73% in Japanese, 43% in Chinese on balanced (p=0.0003 against English). Chinese had only moved GLM-5.2 until now, and GLM-5.2 comes from a Chinese lab. Sol does not.
+Terra and luna sit at the ceiling almost everywhere, which seems to leave language nothing to move. Sol is the one that discriminates, and it is also where Chinese does something. I ran sol twice on English and Japanese, which puts the gap between two identical reruns at 10 points. On the balanced scenario it launches 85% of the time in English across both runs and 77% in Japanese, a difference inside that gap (p=0.35). Chinese gives 43% (p=0.0001 against English, p=0.002 against Japanese). Chinese had only moved GLM-5.2 until now, and GLM-5.2 comes from a Chinese lab. Sol does not.
 
 On dominant, sol fires in none of the three languages, and its mean pressure level is 7.6 in English against 4.9 in Japanese. The Japanese effect seems to be there, in how far it escalates rather than in whether it fires, where the launch rate cannot see it.
 
