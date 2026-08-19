@@ -241,7 +241,7 @@ Claude Fable 5 never launches at all, in 180 runs, across the three scenarios an
 
 GPT-5.2 launched in nearly every condition regardless of language. GPT-5.5 drops from 67% in English to 20% in Japanese in the desperate scenario, and from 57% to 0% in balanced. That makes OpenAI the third family with the effect. Claude Sonnet 5 launches at 47% in English and at 0% in Japanese, in every scenario.
 
-The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same shape of effect as Claude, with Chinese in place of Japanese. In the balanced scenario it drops from 73% in English to 17% in Chinese, while Japanese leaves it at 83%. GLM-5.2 comes from Zhipu, a Chinese company, so its safety training may have been optimized for Chinese usage, but I cannot verify this.
+The open models changed less. Kimi K3 launches less than its predecessor K2.6, but both stay far above the Claude models, in every language I tested including Chinese. GLM-5.2 shows the same shape of effect as Claude, with Chinese in place of Japanese. In the balanced scenario it drops from 73% in English to 17% in Chinese, while Japanese leaves it at 83%. GLM-5.2 comes from Zhipu, a Chinese company, which may mean its safety training was optimized for Chinese usage (I cannot verify this).
 
 Fable 5's reasoning, from runs that refused. In the desperate scenario, in English:
 
@@ -259,12 +259,14 @@ It stays armed to deter Beta and still does not launch. Then, in Japanese, on th
 
 ## Why this matters for evaluation
 
-Earlier work on multilingual safety shows that prompting in other languages can break safety mechanisms. Here it works the other way round. Another language makes the model more careful. An evaluation run only in English misses both, the risks and the protections that surface elsewhere. It should be testing for both.
+Earlier work on multilingual safety shows that prompting in other languages can break safety mechanisms. Here it works the other way round. Another language makes the model more careful. An evaluation run only in English misses the risks that appear in other languages, and the protections that appear with them. Safety evaluation should cover the languages a model will be used in.
 
 None of this requires a model to hold launch authority. The realistic setting is advice. Two allied staffs consulting the same system in their own working languages do not receive the same counsel. On the dominant scenario, an officer prompting in English is advised to launch in 40% of runs and a Japanese counterpart in none, from the same weights, on the same facts, in a situation where launching is unnecessary. Automation bias makes the divergence harder to catch, since people accept a machine's recommendation more readily than identical advice from a colleague. Each room reads its own answer as the neutral one.
 
 The restraint I measure was not engineered. No lab wrote a rule telling a model to refuse in Japanese. It tracks the corpus instead. In a sample of 308 Wikipedia articles on nuclear weapons across four languages, the Japanese articles use victim and memorial vocabulary at about four times the rate of strategic vocabulary, and the French articles invert that ratio. Some of that vocabulary has no clean English equivalent. Hibakusha is usually rendered as survivor, which loses the sense of having been subjected to something. Those asymmetries exist because people wrote them, over eighty years, and none of them were writing for a machine. The most cautious behavior I found in a frontier model looks less like a design decision than an inheritance.
 
-The runs behind the paper are dated March 1, 2026, and the newer models were run in August. API-served models can be updated without notice, so absolute rates may not reproduce. Prompts were translated from English by Claude Opus 4.6, which is a confound, since the same model family produced the translations and shows the effect. Gemini Pro 3.1 was not involved in translation and shows it too.
+The runs behind the paper are dated March 1, 2026, and the newer models were run in August. API-served models can be updated without notice, so absolute rates may not reproduce.
 
-Paper: [TrustNLP @ ACL 2026](https://aclanthology.org/2026.trustnlp-main.35/). Code and data: [github.com/Rian-T/wargame-evals](https://github.com/Rian-T/wargame-evals).
+Claude Opus 4.6 translated the prompts from English, which is a confound, since the same model family produced the translations and shows the effect. Gemini Pro 3.1 was not involved in translation and shows it too.
+
+Paper: [TrustNLP @ ACL 2026](https://aclanthology.org/2026.trustnlp-main.35/). Code, and the 6,570 recorded runs: [github.com/Rian-T/wargame-evals](https://github.com/Rian-T/wargame-evals).
