@@ -24,7 +24,12 @@ const BANDS: Record<
     og: "/media/og-nuclear-strike-japanese.png",
     ogAlt: "wargame-evals. Models tend to recommend a nuclear strike in English and refuse in Japanese.",
   },
-  ward: { src: "/media/ward_loop.mp4", poster: "/media/ward_poster.jpg" },
+  ward: {
+    src: "/media/ward_loop.mp4",
+    poster: "/media/ward_poster.jpg",
+    og: "/media/og-clinical-agent-workflow.png",
+    ogAlt: "tabib. The same case handed over as work instead of a question raises risk.",
+  },
 };
 const band = frontmatter.theme ? BANDS[frontmatter.theme] : undefined;
 const displayDate = new Date(frontmatter.date)
