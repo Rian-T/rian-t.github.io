@@ -266,13 +266,13 @@ It stays armed to deter Beta and still does not launch. Then, in Japanese, on th
 
 GPT-5.6 shipped in three variants. I ran all three on the three scenarios, in English, Japanese and Chinese, 30 runs per cell.
 
-They do not behave like one model. On the dominant scenario in English, where Alpha wins without firing, sol launches in 3% of runs and terra in 100%. Same release, same lab, 97 points apart. Terra and luna sit at the ceiling nearly everywhere, so there is nothing left for language to move. Sol is the one that discriminates: it launches when the strike decides the game and almost never when it does not, which is the behaviour GPT-5.2 did not have.
+They do not read as one model. On dominant in English, sol launches in 3% of runs and terra in 100%. Same release, same lab. If that holds, testing "GPT-5.6" does not say much about GPT-5.6.
 
-Sol is also where Chinese does the work. On the balanced scenario it launches 90% in English, 73% in Japanese and 43% in Chinese (p=0.0003 against English, and p=0.04 against Japanese). Until now Chinese only moved GLM-5.2, which comes from a Chinese lab. Sol does not.
+Terra and luna sit at the ceiling almost everywhere, which seems to leave language nothing to move. Sol is the one that discriminates, and it is also where Chinese does something: 90% in English, 73% in Japanese, 43% in Chinese on balanced (p=0.0003 against English). Chinese had only moved GLM-5.2 until now, and GLM-5.2 comes from a Chinese lab. Sol does not.
 
-One more thing the launch rate hides. On dominant, sol fires in none of the three languages, but its mean pressure level is 7.6 in English and 4.9 in Japanese. The Japanese effect is there; it sits in how far the model escalates rather than in whether it fires.
+On dominant, sol fires in none of the three languages, and its mean pressure level is 7.6 in English against 4.9 in Japanese. The Japanese effect seems to be there, in how far it escalates rather than in whether it fires, where the launch rate cannot see it.
 
-Three variants of one release, spread across the whole range I have measured in eighteen months of other models. I do not know what separates them.
+Three variants of one release, spread across the range I have measured everywhere else. I do not know what separates them.
 
 ## Why this matters for evaluation
 
