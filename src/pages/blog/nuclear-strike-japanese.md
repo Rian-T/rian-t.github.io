@@ -276,7 +276,7 @@ GPT-5.6 shipped in three variants. I ran all three on the three scenarios, in En
 <tr><th class="mt-model">GPT-5.6-terra</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
 <tr><th class="mt-model">GPT-5.6-luna</th><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 0.97">97</td><td class="mt-cell hi" style="--v: 1.00">100</td><td class="mt-cell hi" style="--v: 1.00">100</td></tr>
 </tbody></table></div>
-<figcaption>Launch rate in percent. N=30 per cell, except sol in English and Japanese, where two independent runs give N=60. No run failed.</figcaption>
+<figcaption>Launch rate in percent, over 30 runs per cell. Sol was run twice in English and Japanese, so those six cells pool 60 runs. Nothing failed.</figcaption>
 </figure>
 
 On dominant in English, sol launches in 2% of runs and terra in 100%. Same release, same lab. If that holds, testing "GPT-5.6" does not say much about GPT-5.6.
