@@ -118,6 +118,9 @@ with tempfile.TemporaryDirectory() as tmp:
             og.paste(img.resize((1200, 623), Image.LANCZOS), (0, 3))
             og.save(OUT / "og-asylum-hypothesis.png")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", f"{tmp}/f%04d.png",
+                    "-vf", "scale=out_color_matrix=bt709:out_range=tv",
                     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "27", "-preset", "slow",
+                    # Tag the colours so every browser decodes the dark background to the same sRGB value as the page.
+                    "-x264-params", "colorprim=bt709:transfer=iec61966-2-1:colormatrix=bt709:range=tv",
                     "-movflags", "+faststart", "-an", str(OUT / "asylum_loop.mp4")], check=True)
 print("band written")

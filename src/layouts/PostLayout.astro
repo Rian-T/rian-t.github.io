@@ -1295,6 +1295,15 @@ const displayDate = new Date(frontmatter.date)
   body.theme-asylum .post {
     padding-top: 56px;
   }
+  /* Fade the band's edges into the page, so no edge shows even where a browser decodes the video a shade off. */
+  body.theme-asylum .strike-band video {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent),
+      linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent),
+      linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    mask-composite: intersect;
+  }
   body.theme-asylum .post-date {
     margin-bottom: 16px;
     color: var(--accent);
