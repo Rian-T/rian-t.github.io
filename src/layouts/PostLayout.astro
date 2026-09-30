@@ -55,6 +55,7 @@ const displayDate = new Date(frontmatter.date)
   publishedTime={frontmatter.date}
   modifiedTime={frontmatter.updated ?? frontmatter.date}
   noindex={frontmatter.noindex}
+  preloadFonts={frontmatter.theme === "asylum" ? ["/fonts/InstrumentSerif-Regular.woff2"] : []}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -1275,7 +1276,7 @@ const displayDate = new Date(frontmatter.date)
 
   @font-face {
     font-family: "Instrument Serif";
-    src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+    src: url("/fonts/InstrumentSerif-Regular.woff2") format("woff2");
     font-weight: 400;
     font-display: swap;
   }

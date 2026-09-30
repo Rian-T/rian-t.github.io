@@ -12,6 +12,7 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   noindex?: boolean;
+  preloadFonts?: string[];
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   publishedTime,
   modifiedTime,
   noindex = false,
+  preloadFonts = [],
 } = Astro.props;
 const site = "https://rian-t.github.io";
 const ogImageUrl = ogImage ? site + ogImage : undefined;
@@ -44,6 +46,7 @@ const canonical = site + Astro.url.pathname;
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
+    {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:type" content={ogType} />
