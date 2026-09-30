@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw
 OUT = Path(__file__).resolve().parent.parent / "public/media"
 W, H, S = 1280, 664, 4  # layout size in CSS pixels, drawing scale
 RETINA = 2  # the video is rendered at 2x for retina screens, with 2x supersampling on top
-FPS, SECONDS = 25, 8
+FPS, SECONDS = 60, 8
 FRAMES = FPS * SECONDS
 CX, CY = W / 2, H / 2
 BG = np.array([14, 17, 16], dtype=np.float32)
