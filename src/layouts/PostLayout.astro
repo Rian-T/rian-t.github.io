@@ -8,6 +8,9 @@ interface Props {
     updated?: string;
     description?: string;
     theme?: string;
+    noindex?: boolean;
+    kicker?: string;
+    author?: string;
   };
 }
 
@@ -23,6 +26,12 @@ const BANDS: Record<
     poster: "/media/strike_poster.jpg",
     og: "/media/og-nuclear-strike-japanese.png",
     ogAlt: "wargame-evals. Models tend to recommend a nuclear strike in English and refuse in Japanese.",
+  },
+  asylum: {
+    src: "/media/asylum_loop.mp4",
+    poster: "/media/asylum_poster.jpg",
+    og: "/media/og-asylum-hypothesis.png",
+    ogAlt: "The Asylum Hypothesis. A searchlight sweeps a yard of agents. In the dark, they pass messages.",
   },
   ward: {
     src: "/media/ward_loop.mp4",
@@ -45,6 +54,7 @@ const displayDate = new Date(frontmatter.date)
   ogType="article"
   publishedTime={frontmatter.date}
   modifiedTime={frontmatter.updated ?? frontmatter.date}
+  noindex={frontmatter.noindex}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -66,8 +76,9 @@ const displayDate = new Date(frontmatter.date)
     </header>
 
     <article class="post">
-      <p class="post-date">{displayDate}</p>
+      <p class="post-date">{frontmatter.kicker ?? displayDate}</p>
       <h1>{frontmatter.title}</h1>
+      {frontmatter.author && <p class="post-byline">{frontmatter.author}</p>}
 
       {band && (
         <div class="strike-band" aria-hidden="true">
@@ -236,6 +247,21 @@ const displayDate = new Date(frontmatter.date)
     observer.observe(fig);
   }
 
+  function setupGrowth() {
+    const fig = document.getElementById("growth");
+    if (!fig || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    fig.classList.add("is-js");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          fig.classList.add("is-shown");
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(fig);
+  }
+
   function setupStrike() {
     const video = document.getElementById("strike-video") as HTMLVideoElement | null;
     if (!video) return;
@@ -249,11 +275,13 @@ const displayDate = new Date(frontmatter.date)
   setupStrike();
   setupNewModels();
   setupQueue();
+  setupGrowth();
   document.addEventListener("astro:after-swap", () => {
     setupWargame();
     setupStrike();
     setupNewModels();
     setupQueue();
+      setupGrowth();
   });
 </script>
 
@@ -1072,6 +1100,399 @@ const displayDate = new Date(frontmatter.date)
     color: var(--muted);
     font-family: var(--mono);
     font-size: 11px;
+  }
+
+  /* proposal pages: dense bullets, TL;DR box, the two-voice quote, the growth chart */
+  .post ul {
+    margin: 0 0 18px;
+    padding-left: 20px;
+  }
+  .post li {
+    margin: 0 0 8px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .post li::marker {
+    color: var(--quiet);
+  }
+  .post .tldr {
+    margin: 0 0 28px;
+    padding: 14px 18px 4px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .post .tldr::before {
+    content: "TL;DR";
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .post .two-voices {
+    --staff: #1f6fb2;
+    --peers: #c27a12;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    margin: 4px 0 22px;
+  }
+  .post .two-voices p {
+    margin: 0;
+  }
+  .post .two-voices .head {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 750;
+  }
+  .post .two-voices .head.staff {
+    color: var(--staff);
+  }
+  .post .two-voices .head.peers {
+    color: var(--peers);
+  }
+  .post .two-voices .who {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .post .two-voices .say {
+    padding: 8px 12px;
+    border-left: 3px solid;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .post .two-voices .say.staff {
+    border-color: var(--staff);
+    background: color-mix(in srgb, var(--staff) 10%, var(--paper));
+  }
+  .post .two-voices .say.peers {
+    border-color: var(--peers);
+    background: color-mix(in srgb, var(--peers) 10%, var(--paper));
+  }
+  .post .excerpts {
+    --staff: #1f6fb2;
+    --peers: #c27a12;
+    --self: var(--line-dark);
+    margin: 4px 0 22px;
+  }
+  .post .excerpts p {
+    margin: 0;
+  }
+  .post .excerpts .who {
+    margin: 10px 0 4px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .post .excerpts .say {
+    padding: 8px 12px;
+    border-left: 3px solid var(--self);
+    background: color-mix(in srgb, var(--self) 12%, var(--paper));
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .post .excerpts .say.peers {
+    border-color: var(--peers);
+    background: color-mix(in srgb, var(--peers) 10%, var(--paper));
+  }
+  body.theme-asylum .post .excerpts {
+    --peers: #e0a64a;
+    --self: #7d8683;
+  }
+  body.theme-asylum .post .excerpts .say {
+    color: var(--ink);
+  }
+  .fig-growth {
+    --peers: #c27a12;
+  }
+  .fig-growth svg text {
+    fill: var(--muted);
+    font-family: var(--sans);
+    font-size: 11px;
+  }
+  .fig-growth .grid line {
+    stroke: var(--line);
+  }
+  .fig-growth .grid text {
+    text-anchor: end;
+  }
+  .fig-growth .axis {
+    stroke: var(--line-dark);
+  }
+  .fig-growth .tick {
+    text-anchor: middle;
+  }
+  .fig-growth .step {
+    fill: none;
+    stroke: var(--peers);
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+  .fig-growth.is-js .step {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .fig-growth.is-js.is-shown .step {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 3.2s linear;
+  }
+  .fig-growth.is-js .end,
+  .fig-growth.is-js .end-label {
+    opacity: 0;
+  }
+  .fig-growth.is-js.is-shown .end,
+  .fig-growth.is-js.is-shown .end-label {
+    opacity: 1;
+    transition: opacity 300ms 3.2s;
+  }
+  .fig-growth .end {
+    fill: var(--peers);
+    stroke: var(--bg);
+    stroke-width: 2;
+  }
+  .post .fig-growth svg .end-label {
+    fill: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .fig-growth .hit {
+    fill: transparent;
+  }
+  .fig-growth .first {
+    stroke: var(--line-dark);
+    stroke-dasharray: 3 3;
+  }
+  .post .fig-growth svg .first-name {
+    fill: var(--ink);
+    font-size: 11px;
+  }
+
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+  /* ---- asylum theme: the page takes the band's night background ---- */
+  body.theme-asylum {
+    --bg: #0f1110;
+    --paper: #131716;
+    --ink: #e8e9e6;
+    --muted: #9aa19e;
+    --quiet: #6c7472;
+    --line: #232a28;
+    --line-dark: #3c4442;
+    --accent: #e0a64a;
+    color-scheme: dark;
+  }
+  body.theme-asylum .post {
+    padding-top: 56px;
+  }
+  body.theme-asylum .post-date {
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  body.theme-asylum .post h1 {
+    margin-bottom: 16px;
+    font-family: "Instrument Serif", var(--serif);
+    font-size: clamp(52px, 8vw, 84px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  body.theme-asylum .post .post-byline {
+    margin: 0 0 40px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  body.theme-asylum .post p,
+  body.theme-asylum .post li {
+    color: #e2e5e1;
+    font-family: var(--sans);
+  }
+  body.theme-asylum .post li {
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  body.theme-asylum .post h2 {
+    margin-top: 64px;
+    margin-bottom: 16px;
+    font-family: "Instrument Serif", var(--serif);
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  body.theme-asylum .post a {
+    color: var(--accent);
+  }
+  body.theme-asylum .post blockquote {
+    margin: 8px 0 26px;
+    padding: 18px 22px;
+    border-left: 3px solid var(--accent);
+    background: var(--paper);
+  }
+  body.theme-asylum .post blockquote p {
+    margin: 0 0 10px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  body.theme-asylum .post blockquote p:last-child {
+    margin: 0;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  body.theme-asylum .post .fig {
+    border-color: var(--line);
+  }
+  body.theme-asylum .post .two-voices,
+  body.theme-asylum .fig-growth {
+    --staff: #6aa6e0;
+    --peers: #e0a64a;
+  }
+  body.theme-asylum .post .two-voices .say {
+    color: var(--ink);
+  }
+
+  @media print {
+    @page {
+      margin: 14mm 16mm;
+    }
+    body,
+    body.theme-asylum {
+      --bg: #fff;
+      --paper: #fff;
+      --ink: #151515;
+      --muted: #555;
+      --line: #d9d4cb;
+      --line-dark: #bcb4a8;
+      --accent: #0f6b57;
+      background: #fff;
+    }
+    body.theme-asylum .post p,
+    body.theme-asylum .post li,
+    body.theme-asylum .post .two-voices .say,
+    body.theme-asylum .post .excerpts .say,
+    body.theme-asylum .post blockquote p {
+      color: #151515;
+    }
+    body.theme-asylum .post li {
+      margin-bottom: 3px;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+    body.theme-asylum .post h2 {
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-size: 20px;
+    }
+    body.theme-asylum .post blockquote {
+      margin: 4px 0 8px;
+      padding: 6px 10px;
+    }
+    body.theme-asylum .post blockquote p {
+      font-size: 11.5px;
+    }
+    body.theme-asylum .post blockquote p:last-child {
+      font-size: 9.5px;
+      color: #555;
+    }
+    body.theme-asylum .post .two-voices,
+    body.theme-asylum .fig-growth {
+      --staff: #1f6fb2;
+      --peers: #c27a12;
+    }
+    .top,
+    .strike-band {
+      display: none;
+    }
+    .shell {
+      width: 100%;
+      padding: 0;
+    }
+    .post {
+      padding: 0;
+      max-width: none;
+    }
+    .post h1,
+    body.theme-asylum .post h1 {
+      margin-bottom: 4px;
+      font-size: 34px;
+    }
+    body.theme-asylum .post .post-byline {
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+    body.theme-asylum .post {
+      padding-top: 0;
+    }
+    body.theme-asylum .post-date {
+      margin-bottom: 6px;
+    }
+    .post h2 {
+      margin: 14px 0 6px;
+      font-size: 16px;
+    }
+    .post li {
+      margin-bottom: 3px;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+    .post ul {
+      margin-bottom: 8px;
+    }
+    .post .tldr {
+      margin-bottom: 12px;
+      padding: 8px 12px 2px;
+    }
+    .post blockquote,
+    .post blockquote p {
+      margin-bottom: 4px;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .post .two-voices .say,
+    .post .excerpts .say {
+      padding: 5px 9px;
+      font-size: 10px;
+    }
+    .post .excerpts .who {
+      margin: 5px 0 2px;
+      font-size: 9px;
+    }
+    .post .fig {
+      margin: 8px 0 10px;
+      padding: 8px 0 2px;
+      margin-right: 0;
+      break-inside: avoid;
+    }
+    .post .fig figcaption {
+      margin: 6px 0 4px;
+      font-size: 9.5px;
+      max-width: none;
+    }
+    .fig-growth.is-js .step {
+      stroke-dashoffset: 0;
+    }
+    .fig-growth.is-js .end,
+    .fig-growth.is-js .end-label {
+      opacity: 1;
+    }
+    .post a {
+      text-decoration: none;
+    }
   }
 
   @media (max-width: 620px) {

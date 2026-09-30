@@ -11,6 +11,7 @@ interface Props {
   ogType?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   ogType = "website",
   publishedTime,
   modifiedTime,
+  noindex = false,
 } = Astro.props;
 const site = "https://rian-t.github.io";
 const ogImageUrl = ogImage ? site + ogImage : undefined;
@@ -41,6 +43,7 @@ const canonical = site + Astro.url.pathname;
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:type" content={ogType} />
