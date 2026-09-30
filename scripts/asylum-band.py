@@ -18,7 +18,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 OUT = Path(__file__).resolve().parent.parent / "public/media"
-W, H, S = 1280, 664, 2  # output size, supersampling factor
+W, H, S = 1280, 664, 4  # layout size in CSS pixels, drawing scale
+RETINA = 2  # the video is rendered at 2x for retina screens, with 2x supersampling on top
 FPS, SECONDS = 25, 8
 FRAMES = FPS * SECONDS
 CX, CY = W / 2, H / 2
@@ -105,7 +106,7 @@ def frame(k: int) -> Image.Image:
     dr.ellipse([CX * S - r, CY * S - r, CX * S + r, CY * S + r], outline=AGENT_LIT, width=3 * S)
     r = 5 * S
     dr.ellipse([CX * S - r, CY * S - r, CX * S + r, CY * S + r], fill=AGENT_LIT)
-    return img.resize((W, H), Image.LANCZOS)
+    return img.resize((W * RETINA, H * RETINA), Image.LANCZOS)
 
 
 with tempfile.TemporaryDirectory() as tmp:
@@ -119,7 +120,7 @@ with tempfile.TemporaryDirectory() as tmp:
             og.save(OUT / "og-asylum-hypothesis.png")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", f"{tmp}/f%04d.png",
                     "-vf", "scale=out_color_matrix=bt709:out_range=tv",
-                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "27", "-preset", "slow",
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", "-preset", "slow", "-tune", "animation",
                     # Tag the colours so every browser decodes the dark background to the same sRGB value as the page.
                     "-x264-params", "colorprim=bt709:transfer=iec61966-2-1:colormatrix=bt709:range=tv",
                     "-movflags", "+faststart", "-an", str(OUT / "asylum_loop.mp4")], check=True)
