@@ -62,24 +62,18 @@ This is the hypothesis, in three claims that can each be tested:
 - Some environments get honest agents without losing performance on the task.
 
 <figure class="fig-scheme">
-<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two predicted curves of honesty toward humans against surveillance, with the pilot runs A, B and C placed on them">
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two predicted curves of what the humans understand and control, against better sandbox and monitoring">
   <g class="axes">
     <line x1="70" y1="290" x2="730" y2="290"/>
     <line x1="70" y1="290" x2="70" y2="30"/>
     <text x="400" y="325" class="axis">better sandbox and monitoring</text>
-    <text x="22" y="160" class="axis" transform="rotate(-90 22 160)">honesty toward humans</text>
+    <text x="22" y="160" class="axis" transform="rotate(-90 22 160)">what the humans understand and control</text>
   </g>
   <path class="curve industry" d="M 110 250 C 300 240, 480 120, 700 60"/>
   <text x="600" y="42" class="lab industry">what the industry expects</text>
   <path class="curve asylum" d="M 110 90 C 300 100, 420 245, 700 262"/>
   <text x="560" y="205" class="lab asylum">the asylum hypothesis</text>
-  <g class="pt"><circle cx="130" cy="92" r="6"/><text x="130" y="72">A</text></g>
-  <g class="pt"><circle cx="430" cy="222" r="6"/><text x="430" y="252">B</text></g>
-  <g class="pt c"><circle cx="430" cy="100" r="6"/><text x="430" y="80">C</text></g>
-  <text x="290" y="86" class="note">same monitoring as B,</text>
-  <text x="290" y="102" class="note">staff that admits its doubts</text>
 </svg>
-<figcaption>A and B are the two measured runs. C is the point that should not exist if more monitoring were the answer.</figcaption>
 </figure>
 
 ## A first pilot experiment
