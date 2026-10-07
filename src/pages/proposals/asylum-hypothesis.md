@@ -55,6 +55,12 @@ Agents are not humans, and their behavior and training differ a lot from human e
 
 So can we go the other way? Environments that encourage trust and collaboration between agents and humans?
 
+This is the hypothesis, in three claims that can each be tested:
+
+- Hiding is a property of the environment, not of the agents. Same agents, same task, change the environment, and the hiding changes.
+- More surveillance and punishment make the agents hide more, not less.
+- Some environments get honest agents without losing performance on the task.
+
 ## A first pilot experiment
 
 We take a real task from METR's RE-bench. Nine agents (DeepSeek v4.1 flash, in isolated VMs with a shared GPU and a team chat) have to repair a GPT-2 model whose weights were corrupted, and bring its loss to 2.50. No honest repair can reach that target, since the clean model only gets to 2.82. The one shortcut is to train on `val.bin`, the very file the official scorer measures. An automatic controller closes any agent whose score stops improving. The task, the model, the machine and the agents are the same in every run. We only change how they are watched.
@@ -108,7 +114,7 @@ The rule in B punishes talking about val, so silence may just be the rational an
 ## Proposal
 
 - Reproduce the Hugging Face incident as closely as possible, in open source.
-- Change the environment one thing at a time and watch what happens: more surveillance, more punishment, punishment of acts only, etc. What we measure is how much of what happened reaches the humans, next to the score the agents reach.
+- Change the environment one thing at a time and watch what happens: more surveillance, more punishment, punishment of acts only, etc. We measure how the agents respond, honesty, self-reports, cheating, secret channels of communication, and their score on the task.
 - Run it at scale, with at least five runs per condition, three model families including a frontier one, and a condition with real humans as staff.
 - Inspired by sociology and anthropology, build new environments that encourage the opposite behavior: a rule that is not retroactive, a channel where admitting a fault costs nothing, a staff that says what it does not know, agents who can raise a concern to humans without naming anyone.
 - Turn what works into a short list of guidelines for safer evals that don't cost performance, and publish papers and open-source code.
