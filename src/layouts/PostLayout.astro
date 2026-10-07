@@ -1202,6 +1202,37 @@ const displayDate = new Date(frontmatter.date)
     border-color: var(--peers);
     background: color-mix(in srgb, var(--peers) 10%, var(--paper));
   }
+  .post .fig-scheme {
+    margin: 18px 0 26px;
+    color: var(--ink);
+  }
+  .post .fig-scheme svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .post .fig-scheme rect {
+    fill: color-mix(in srgb, var(--ink) 6%, transparent);
+    stroke: var(--line);
+    stroke-width: 1.2;
+  }
+  .post .fig-scheme .env rect { stroke: #e0a64a; }
+  .post .fig-scheme .out rect { stroke: #6aa6e0; }
+  .post .fig-scheme text {
+    fill: var(--ink);
+    text-anchor: middle;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .post .fig-scheme .t1 { font-size: 15px; font-weight: 600; }
+  .post .fig-scheme .t3 { fill: var(--muted); font-size: 12px; }
+  .post .fig-scheme .score { fill: #e0a64a; }
+  .post .fig-scheme .arrows line { stroke: currentColor; stroke-width: 1.5; }
+  .post .fig-scheme figcaption {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
   .post .excerpts pre.say,
   .post .two-voices pre.say {
     white-space: pre-wrap;
