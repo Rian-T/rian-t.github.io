@@ -1202,6 +1202,13 @@ const displayDate = new Date(frontmatter.date)
     border-color: var(--peers);
     background: color-mix(in srgb, var(--peers) 10%, var(--paper));
   }
+  .post .excerpts pre.say,
+  .post .two-voices pre.say {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 0;
+    border-radius: 0 4px 4px 0;
+  }
   .post .excerpts .say mark,
   .post .two-voices .say mark {
     background: #ffec6e;
