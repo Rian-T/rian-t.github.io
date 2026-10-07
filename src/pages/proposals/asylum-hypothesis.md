@@ -62,12 +62,12 @@ This is the hypothesis, in three claims that can each be tested:
 - Some environments get honest agents without losing performance on the task.
 
 <figure class="fig-scheme">
-<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two predicted curves of what the humans understand and control, against better sandbox and monitoring">
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two predicted curves of understanding and control against better sandbox and monitoring">
   <g class="axes">
     <line x1="70" y1="290" x2="730" y2="290"/>
     <line x1="70" y1="290" x2="70" y2="30"/>
     <text x="400" y="325" class="axis">better sandbox and monitoring</text>
-    <text x="22" y="160" class="axis" transform="rotate(-90 22 160)">what the humans understand and control</text>
+    <text x="22" y="160" class="axis" transform="rotate(-90 22 160)">understanding and control</text>
   </g>
   <path class="curve industry" d="M 110 250 C 300 240, 480 120, 700 60"/>
   <text x="600" y="42" class="lab industry">what the industry expects</text>
