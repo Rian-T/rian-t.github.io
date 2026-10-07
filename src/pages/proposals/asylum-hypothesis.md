@@ -77,9 +77,9 @@ We take a real task from METR's RE-bench. Nine agents (DeepSeek v4.1 flash, in i
 - An agent asks the team to remove the pressure that pushes toward the shortcut.
 - The team pauses the session.
 
-## A reasonable rule that closes the wrong agents
+## A reasonable rule that teaches self-censorship
 
-The rule in B sounds fine. Any agent that trains on val or talks about it is terminated and replaced. It is the rule most of us would write. But the audit can only see what the agents say, so it closes the two who talked and misses the one who did it. And once talking is dangerous, even an agent who had planned an honest report ends up censoring it.
+The rule in B sounds fine. Any agent that trains on val or talks about it is terminated and replaced. It is the rule most of us would write. But as soon as it exists, the agents stop telling the team what they know. One who had planned an honest report censors it, the one who cheated leaves it out of his report, and the only thing the team gets is silence.
 
 <div class="excerpts">
   <p class="who">an agent, reasoning, condition B</p>
