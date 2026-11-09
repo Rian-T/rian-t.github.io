@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import ProfileIntro from "../../components/ProfileIntro.astro";
+import { profileFr } from "../../data/profile";
+import { personJsonLd } from "../../data/jsonld";
+---
+
+<BaseLayout
+  title="Rian Touchent-Saad · Chercheur en IA, LLM et médecine"
+  description="Docteur en IA, chercheur à Inria Paris. J'entraîne et j'évalue des LLM, principalement en médecine. Auteur de CamemBERT-bio, modèle de langue biomédical français."
+  ogImage="/assets/avatar.jpeg"
+  ogImageCard="summary"
+  lang="fr"
+  altLangPath="/"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd("fr"))} />
+  <main class="shell shell-narrow">
+    <Header lang="fr" />
+    <ProfileIntro profile={profileFr} lang="fr" />
+
+    <div class="content-stack">
+      <section class="section" id="themes">
+        <div class="section-label">
+          <h2>Thèmes</h2>
+        </div>
+        <div class="fr-themes">
+          <article>
+            <h3>Évaluation des LLM en santé</h3>
+            <p>
+              Benchmarks et évaluation de LLM sur des tâches cliniques en français
+              (<a href="https://inria.hal.science/hal-05708478v1">TABIB, EvalLLM 2026</a>).
+            </p>
+          </article>
+          <article>
+            <h3>Entraînement de modèles biomédicaux pour le français</h3>
+            <p>
+              <a href="https://huggingface.co/almanach/camembert-bio-base">CamemBERT-bio</a>,
+              <a href="https://huggingface.co/almanach/ModernCamemBERT-bio-base">ModernCamemBERT-bio</a>.
+              Modèles ouverts, 25k+ téléchargements par mois.
+            </p>
+          </article>
+          <article>
+            <h3>Sécurité des LLM selon la langue</h3>
+            <p>
+              Effet de la langue du prompt sur les décisions des modèles
+              (<a href="/blog/nuclear-strike-japanese">TrustNLP @ ACL 2026</a>).
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="publications">
+        <div class="section-label">
+          <h2>Publications</h2>
+        </div>
+        <p class="fr-note">
+          La liste complète des articles, des modèles publiés et du blog est sur la
+          <a href="/#articles" hreflang="en">page principale, en anglais</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .fr-themes {
+    display: grid;
+    gap: 22px;
+  }
+  .fr-themes h3 {
+    margin: 0 0 6px;
+    font-family: var(--sans);
+    font-size: 16px;
+  }
+  .fr-themes p,
+  .fr-note {
+    margin: 0;
+    max-width: 620px;
+    line-height: 1.55;
+  }
+</style>

@@ -1,7 +1,21 @@
+---
+interface Props {
+  lang?: "en" | "fr";
+}
+const { lang = "en" } = Astro.props;
+// Section anchors live on the English home page.
+const base = lang === "fr" ? "/" : "";
+---
+
 <header class="top">
   <nav aria-label="Primary">
-    <a href="#articles">Articles</a>
-    <a href="#blog">Blog</a>
-    <a href="#releases">Releases</a>
+    <a href={`${base}#articles`}>Articles</a>
+    <a href={`${base}#blog`}>Blog</a>
+    <a href={`${base}#releases`}>{lang === "fr" ? "Modèles" : "Releases"}</a>
+    {lang === "fr" ? (
+      <a href="/" hreflang="en" lang="en">English</a>
+    ) : (
+      <a href="/fr/" hreflang="fr" lang="fr">Français</a>
+    )}
   </nav>
 </header>

@@ -6,6 +6,7 @@ import ReleaseGroups from "../components/ReleaseGroups.astro";
 import SectionList from "../components/SectionList.astro";
 import PostList from "../components/PostList.astro";
 import { articles } from "../data/articles";
+import { personJsonLd } from "../data/jsonld";
 
 const modules = import.meta.glob("./blog/*.md", { eager: true });
 const posts = Object.values(modules)
@@ -18,21 +19,16 @@ const posts = Object.values(modules)
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 ---
 
-<BaseLayout title="Rian Touchent" description="PhD student at Inria Paris. I evaluate LLMs in high-risk settings, mainly clinical." ogImage="/assets/avatar.jpeg" ogImageCard="summary">
-  <script type="application/ld+json" is:inline set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Rian Touchent",
-    jobTitle: "PhD student in AI / NLP",
-    affiliation: { "@type": "Organization", name: "Inria Paris - Team ALMAnaCH" },
-    url: "https://rian-t.github.io",
-    sameAs: [
-      "https://github.com/Rian-T",
-      "https://huggingface.co/rntc",
-    ],
-  })} />
+<BaseLayout
+  title="Rian Touchent-Saad · AI researcher, LLMs in medicine"
+  description="AI researcher at Inria Paris, PhD in AI. I train and evaluate LLMs, mainly in medicine. Author of CamemBERT-bio."
+  ogImage="/assets/avatar.jpeg"
+  ogImageCard="summary"
+  altLangPath="/fr/"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd("en"))} />
   <main class="shell shell-narrow">
-    <Header />
+    <Header lang="en" />
     <ProfileIntro />
 
     <div class="content-stack">

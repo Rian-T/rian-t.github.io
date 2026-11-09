@@ -14,6 +14,18 @@ export const articles = [
   },
   {
     year: "2026",
+    title: "TABIB: Vers un Benchmark Adversarial Français pour les LLMs Biomédicaux",
+    venue: "EvalLLM @ CORIA-TALN 2026",
+    citations: 0,
+    abstract:
+      "Nous présentons les premiers résultats de TABIB (Testing Adversarial Behaviors In Biomedical LLMs), un benchmark d'évaluation comportementale des LLMs biomédicaux en français. Cette première version s'appuie sur le thésaurus ANSM des interactions médicamenteuses et la BDPM, avec sept protocoles que nous prévoyons d'étendre. Les benchmarks existants évaluent la connaissance factuelle ; TABIB évalue la robustesse face à des perturbations qui préservent la sémantique de la question (substitution DCI/marque, enchâssement contextuel, pression patient, changement de langue). Sur sept modèles locaux (2B–9B), les résultats révèlent des fragilités significatives : la détection d'interactions peut chuter jusqu'à 74 pp quand la paire est noyée dans un compte-rendu clinique ; jusqu'à 28 % des conversations où un patient conteste l'avis du modèle finissent en conseil dangereux ; à cas cliniques identiques, certains profils démographiques sont systématiquement priorisés en classement simultané, alors que l'évaluation patient par patient ne révèle aucun biais.",
+    links: [
+      { label: "HAL", href: "https://inria.hal.science/hal-05708478v1" },
+      { label: "PDF", href: "https://talnarchives.atala.org/ateliers/2026/evalLLM/733487.pdf" },
+    ],
+  },
+  {
+    year: "2026",
     title: "OntoBook: Ontology-Grounded Synthetic Textbooks for Medical Encoder Pretraining",
     venue: "KG-LLM @ LREC 2026",
     citations: 1,
